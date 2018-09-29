@@ -9,6 +9,6 @@ package proyecto1;
  *
  * @author ervi
  */
-public class FabricarTextoFijo {
+public class MetodosUsuarios {
     
 }
