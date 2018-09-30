@@ -8,7 +8,10 @@ package proyecto1;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -261,23 +264,21 @@ public class VentanaUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTelefonoActionPerformed
 
     private void btnCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearUsuarioActionPerformed
-        //Esto es para guardar la imagen seleccionada en la carpeta
-        
-        File path = new File ("C:\\MEIA\\fotografia");
-        String respuesta = GuardarArchivo(path, imagen);
-        
-        if(respuesta != null){
-            JOptionPane.showMessageDialog(null, "Archivo guardado");
-        }else{
-            JOptionPane.showMessageDialog(null, "Archivo no guardado");
-        }
-        
         MetodosBitacora mb = new MetodosBitacora();
-        Date fecha = new Date(Integer.parseInt(txtAño.getText()), Integer.parseInt(txtMes.getText()), Integer.parseInt(txtDia.getText()));
-        Usuarios u = new Usuarios(txtUsuario.getText(),txtNombre.getText(),txtApellido.getText(),txtContraseña.getText(),'1', fecha,txtCorreo.getText(), 
-        Integer.parseInt(txtTelefono.getText()),"foto",'0');
-        mb.LlenarArchivo("C:/MEIA/usuarios.txt", u.ConvertirATextoTamañoFijo(), "error");
         
+        try {
+            if (mb.validarUsuario("C:/MEIA/usuarios.txt", txtUsuario.getText())) {
+                
+            }else{
+                Date fecha = new Date(Integer.parseInt(txtAño.getText()), Integer.parseInt(txtMes.getText()), Integer.parseInt(txtDia.getText()));
+                Usuarios u = new Usuarios(txtUsuario.getText(),txtNombre.getText(),txtApellido.getText(),txtContraseña.getText(),'1', fecha,txtCorreo.getText(), 
+                Integer.parseInt(txtTelefono.getText()),"foto",'0');
+                mb.LlenarArchivo("C:/MEIA/usuarios.txt", u.ConvertirATextoTamañoFijo(), "error");
+        
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btnCrearUsuarioActionPerformed
 

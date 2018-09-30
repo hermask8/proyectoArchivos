@@ -70,25 +70,25 @@ public class Usuarios {
             StringBuilder sb = new StringBuilder();
 
             sb.append(padLeft(Usuario,20,"%"));
-            sb.append("|");
+            sb.append("//");
             sb.append(padLeft(Nombre,30,"%"));
-            sb.append("|");
+            sb.append("//");
             sb.append(padLeft(Apellido,30,"%"));
-            sb.append("|");
+            sb.append("//");
             sb.append(padLeft(Pasword,40,"%"));
-            sb.append("|");
+            sb.append("//");
             sb.append(String.valueOf(Rol));
-            sb.append("|");
+            sb.append("//");
             DateFormat df = new SimpleDateFormat("dd/mm/yyyy HH:mm:ss");
             String date = df.format(Fecha);
             sb.append(padLeft(date,19,"%"));
-            sb.append("|");
+            sb.append("//");
             sb.append(padLeft(Correo,40,"%"));
-            sb.append("|");
+            sb.append("//");
             sb.append(padLeft(String.valueOf(Telefono),10,"%"));
-            sb.append("|");
+            sb.append("//");
             sb.append(padLeft(PathFotografia,200,"%"));
-            sb.append("|");
+            sb.append("//");
             sb.append(String.valueOf(Status));
             return sb.toString();
         }

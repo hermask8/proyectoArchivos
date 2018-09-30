@@ -49,6 +49,11 @@ public class VentanaLogin extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Logo/LOGO_MEIA2 (2).png"))); // NOI18N
 
         btnInisiarSesion.setText("Iniciar Sesion");
+        btnInisiarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInisiarSesionActionPerformed(evt);
+            }
+        });
 
         btnRegistro.setText("Rigristrate");
         btnRegistro.addActionListener(new java.awt.event.ActionListener() {
@@ -121,6 +126,10 @@ public class VentanaLogin extends javax.swing.JFrame {
         this.setVisible(false);
         
     }//GEN-LAST:event_btnRegistroActionPerformed
+
+    private void btnInisiarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInisiarSesionActionPerformed
+        
+    }//GEN-LAST:event_btnInisiarSesionActionPerformed
 
     /**
      * @param args the command line arguments

@@ -95,21 +95,21 @@ public class MetodosBitacora {
         }
     }
     
-    public boolean validarUsuario(String strPath,String contra) throws FileNotFoundException, IOException
+    public boolean validarUsuario(String strPath,String usuario) throws FileNotFoundException, IOException
     {
         boolean validar2 = false;
         File Archivo = new File(strPath);
-        if (Archivo.exists()) 
-        { 
-            BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
+        BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
             String last = br.readLine();
             while (last != null) 
             { 
-                String[] valido = last.split("|");
-                String contrase = valido[0].substring(valido[0].indexOf("%") + 1);
-                validar2 = contrase.equals(contra);
+                String[] valido = last.split("//");
+                while(usuario.length() < 20){
+                    usuario = "%" + usuario;
+                }
+                validar2 = valido[0].equals(usuario);
+                last = br.readLine();
             } 
-        }
         return validar2;
     }
     
