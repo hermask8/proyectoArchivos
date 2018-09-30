@@ -95,8 +95,25 @@ public class MetodosBitacora {
         }
     }
     
+    public boolean validarUsuario(String strPath,String contra) throws FileNotFoundException, IOException
+    {
+        boolean validar2 = false;
+        File Archivo = new File(strPath);
+        if (Archivo.exists()) 
+        { 
+            BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
+            String last = br.readLine();
+            while (last != null) 
+            { 
+                String[] valido = last.split("|");
+                String contrase = valido[3].substring(valido[3].indexOf("%") + 1);
+                validar2 = contrase.equals(contra);
+            } 
+        }
+        return validar2;
+    }
     
-    public boolean EscribirDescVitacora()
+    public boolean EscribirDescBitacora()
     {
         return false;
     }
@@ -124,5 +141,20 @@ public class MetodosBitacora {
         int validar = Integer.valueOf(objeto[5]) / Integer.valueOf(objeto[8]) ;
         objeto = null;
         return validar ==0;
+    }
+    
+    public void escribirMaster()
+    {
+        
+    }
+    
+    public void escribirDescBitacora()
+    {
+        
+    }
+    
+    public void escribirDescMaster()
+    {
+    
     }
 }
