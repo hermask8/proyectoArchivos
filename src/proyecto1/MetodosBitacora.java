@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.swing.DefaultListModel;
 
 /**
@@ -22,12 +23,14 @@ public class MetodosBitacora {
     
     public boolean LlenarArchivo(String strPath,String strContenido,String strError)
     {
+        
         File Archivo = new File(strPath);
         
         try
         {
                 FileWriter Escribir = new FileWriter(Archivo,true);
                 BufferedWriter bw = new BufferedWriter(Escribir);
+                
                 bw.write(strContenido + System.lineSeparator());
                 bw.close();
                 Escribir.close();

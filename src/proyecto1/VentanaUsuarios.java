@@ -8,6 +8,7 @@ package proyecto1;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -58,7 +59,7 @@ public class VentanaUsuarios extends javax.swing.JFrame {
         txtApellido = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
         txtContraseña = new javax.swing.JPasswordField();
-        txtNumero = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         txtMes = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -89,14 +90,14 @@ public class VentanaUsuarios extends javax.swing.JFrame {
 
         jLabel9.setText("Telefono:");
 
-        txtNumero.addActionListener(new java.awt.event.ActionListener() {
+        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNumeroActionPerformed(evt);
+                txtTelefonoActionPerformed(evt);
             }
         });
-        txtNumero.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNumeroKeyTyped(evt);
+                txtTelefonoKeyTyped(evt);
             }
         });
 
@@ -150,7 +151,7 @@ public class VentanaUsuarios extends javax.swing.JFrame {
                                             .addComponent(jLabel11)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                             .addComponent(txtAño, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel5)
@@ -236,7 +237,7 @@ public class VentanaUsuarios extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(lblMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addComponent(btnCrearUsuario)
@@ -246,18 +247,18 @@ public class VentanaUsuarios extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyTyped
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
         char validar = evt.getKeyChar();
         if(Character.isLetter(validar)){
             getToolkit().beep();
             evt.consume();
             
         }
-    }//GEN-LAST:event_txtNumeroKeyTyped
+    }//GEN-LAST:event_txtTelefonoKeyTyped
 
-    private void txtNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroActionPerformed
+    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumeroActionPerformed
+    }//GEN-LAST:event_txtTelefonoActionPerformed
 
     private void btnCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearUsuarioActionPerformed
         //Esto es para guardar la imagen seleccionada en la carpeta
@@ -270,6 +271,14 @@ public class VentanaUsuarios extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "Archivo no guardado");
         }
+        
+        MetodosBitacora mb = new MetodosBitacora();
+        Date fecha = new Date(Integer.parseInt(txtAño.getText()), Integer.parseInt(txtMes.getText()), Integer.parseInt(txtDia.getText()));
+        Usuarios u = new Usuarios(txtUsuario.getText(),txtNombre.getText(),txtApellido.getText(),txtContraseña.getText(),'1', fecha,txtCorreo.getText(), 
+        Integer.parseInt(txtTelefono.getText()),"foto",'0');
+        mb.LlenarArchivo("C:/MEIA/usuarios.txt", u.ConvertirATextoTamañoFijo(), "error");
+        
+        
     }//GEN-LAST:event_btnCrearUsuarioActionPerformed
 
     private void btnSeleccionarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarImagenActionPerformed
@@ -349,7 +358,7 @@ public class VentanaUsuarios extends javax.swing.JFrame {
     private javax.swing.JTextField txtDia;
     private javax.swing.JTextField txtMes;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNumero;
+    private javax.swing.JTextField txtTelefono;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

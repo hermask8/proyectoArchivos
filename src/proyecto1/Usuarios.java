@@ -5,6 +5,8 @@
  */
 package proyecto1;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -77,7 +79,9 @@ public class Usuarios {
             sb.append("|");
             sb.append(String.valueOf(Rol));
             sb.append("|");
-            sb.append(padLeft(Fecha.toString(),9,"%"));
+            DateFormat df = new SimpleDateFormat("dd/mm/yyyy HH:mm:ss");
+            String date = df.format(Fecha);
+            sb.append(padLeft(date,19,"%"));
             sb.append("|");
             sb.append(padLeft(Correo,40,"%"));
             sb.append("|");
