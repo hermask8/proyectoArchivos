@@ -15,7 +15,7 @@ import java.io.IOException;
  * @author ervi
  */
 public class MetodosUsuarios {
-    public boolean LlenarArchivo(String strPath,String strContenido,String strError)
+    public boolean EscribirUsuario(String strPath,String strContenido,String strError)
     {
         File Archivo = new File(strPath);
         
@@ -34,6 +34,11 @@ public class MetodosUsuarios {
             strError= ex.getMessage();
             return false;
         } 
+        
+    }
+    
+    public void escribirDescMaster()
+    {
         
     }
 }
