@@ -106,7 +106,7 @@ public class MetodosBitacora {
             while (last != null) 
             { 
                 String[] valido = last.split("|");
-                String contrase = valido[3].substring(valido[3].indexOf("%") + 1);
+                String contrase = valido[0].substring(valido[0].indexOf("%") + 1);
                 validar2 = contrase.equals(contra);
             } 
         }
