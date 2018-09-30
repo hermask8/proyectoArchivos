@@ -92,15 +92,34 @@ public class MetodosBitacora {
         }
     }
     
-    public boolean ValidarLLeno()
-    {
-        return false;
-    }
     
     public boolean EscribirDescVitacora()
     {
         return false;
     }
     
+    public String leerUltimaLinea(String strPath) throws FileNotFoundException, IOException
+    {
+        String lastLine= "";
+        File Archivo = new File(strPath);
+        if (Archivo.exists()) 
+        { 
+            BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
+            String last = br.readLine(); 
+            while (last != null) 
+            { 
+            lastLine = last; 
+            last = br.readLine(); 
+            } 
+        }
+        return lastLine;
+    }
     
+    public boolean ValidarEscritura(String strPath ) throws IOException
+    {
+        String[] objeto = leerUltimaLinea(strPath).split("|");
+        int validar = Integer.valueOf(objeto[5]) / Integer.valueOf(objeto[8]) ;
+        objeto = null;
+        return validar ==0;
+    }
 }
