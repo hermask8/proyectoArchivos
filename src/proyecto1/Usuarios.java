@@ -4,10 +4,16 @@
  * and open the template in the editor.
  */
 package proyecto1;
-
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -25,7 +31,7 @@ public class Usuarios {
      int Telefono;
      String PathFotografia;
      char Status;
-
+     int contadorDeFotos = 0;
      
      
     public static String padLeft(String str, int length, String padChar) 
@@ -64,7 +70,29 @@ public class Usuarios {
             this.PathFotografia = pathFoto;
             this.Status=status;
         }
-
+        
+        public void GuardarFoto(String path, byte[] imagen){
+            
+            contadorDeFotos++;
+            try
+            {
+                FileInputStream fis = new FileInputStream(path); 
+                FileOutputStream fos = new FileOutputStream("‪C:\\MEIA\\fotografia\\FotoDePerfil" + contadorDeFotos );
+                FileChannel inChannel = fis.getChannel(); 
+                FileChannel outChannel = fos.getChannel(); 
+                inChannel.transferTo(0, inChannel.size(), outChannel); 
+                fis.close(); 
+                fos.close();
+            }
+             
+            catch(IOException e)
+            {
+                
+                
+        }
+        }
+        
+        
         public String ConvertirATextoTamañoFijo()
         {
             StringBuilder sb = new StringBuilder();

@@ -265,20 +265,31 @@ public class VentanaUsuarios extends javax.swing.JFrame {
 
     private void btnCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearUsuarioActionPerformed
         MetodosBitacora mb = new MetodosBitacora();
-        
-        try {
-            if (mb.validarUsuario("C:/MEIA/usuarios.txt", txtUsuario.getText())) {
-                
-            }else{
-                Date fecha = new Date(Integer.parseInt(txtAño.getText()), Integer.parseInt(txtMes.getText()), Integer.parseInt(txtDia.getText()));
-                Usuarios u = new Usuarios(txtUsuario.getText(),txtNombre.getText(),txtApellido.getText(),txtContraseña.getText(),'1', fecha,txtCorreo.getText(), 
-                Integer.parseInt(txtTelefono.getText()),"foto",'0');
-                mb.LlenarArchivo("C:/MEIA/usuarios.txt", u.ConvertirATextoTamañoFijo(), "error");
-        
-            }
-        } catch (IOException ex) {
+        if(!txtUsuario.getText().isEmpty() && !txtNombre.getText().isEmpty() && !txtApellido.getText().isEmpty() && !txtCorreo.getText().isEmpty() 
+                && !txtContraseña.getText().isEmpty() && !txtDia.getText().isEmpty() && !txtMes.getText().isEmpty() && !txtAño.getText().isEmpty() 
+                && !txtTelefono.getText().isEmpty()){
+            
+            if (imagen != null) {
+                try {
+                if (mb.validarUsuario("C:/MEIA/usuarios.txt", txtUsuario.getText())) {
+                    JOptionPane.showMessageDialog(null,"Nombre de Usuario existente, por favor escoja otro nombre de usuario");
+                }else{
+                    Date fecha = new Date(Integer.parseInt(txtAño.getText()), Integer.parseInt(txtMes.getText()), Integer.parseInt(txtDia.getText()));
+                    Usuarios u = new Usuarios(txtUsuario.getText(),txtNombre.getText(),txtApellido.getText(),txtContraseña.getText(),'1', fecha,txtCorreo.getText(), 
+                    Integer.parseInt(txtTelefono.getText()),archivo.getPath(),'0');
+                    mb.LlenarArchivo("C:/MEIA/usuarios.txt", u.ConvertirATextoTamañoFijo(), "error");
+                    u.GuardarFoto(archivo.getPath(), imagen);
+
+                }
+            } catch (IOException ex) {
             Logger.getLogger(VentanaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }else{
+                JOptionPane.showMessageDialog(null,"Seleccione foto de perfil");
+            }
+            
         }
+        
         
     }//GEN-LAST:event_btnCrearUsuarioActionPerformed
 
