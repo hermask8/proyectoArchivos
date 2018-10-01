@@ -284,6 +284,7 @@ public class VentanaUsuarios extends javax.swing.JFrame {
                     Integer.parseInt(txtTelefono.getText()),mu.CopiarImagen(path, txtUsuario.getText()),'0');
                     
                     mb.Escribir(u.ConvertirATextoTamañoFijo(),"Error");
+                    
                     DescBitacora db = new DescBitacora();
                     db.NombreSimbolico = txtUsuario.getText();
                     db.usuarioModificacion = txtUsuario.getText();

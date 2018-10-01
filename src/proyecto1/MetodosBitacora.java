@@ -77,7 +77,7 @@ public class MetodosBitacora {
                 BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
                 BufferedReader br2 = new BufferedReader(new FileReader(Archivo2)); 
                 String last = br.readLine(); 
-                String last2 = br.readLine(); 
+                String last2 = br2.readLine(); 
                 while (last != null) 
                 { 
                     LlenarArchivo(pathMaster,last,strError);
@@ -88,13 +88,14 @@ public class MetodosBitacora {
                 br.close();
                 br2.close();
             }
-            LlenarArchivo(pathMaster,strContenido,strError);
+            
             BufferedWriter bw = new BufferedWriter(new FileWriter(pathBitacora));
             bw.write("");
             bw.close();
             BufferedWriter bw2 = new BufferedWriter(new FileWriter(pathDescBitacora));
             bw2.write("");
             bw2.close();
+            LlenarArchivo(pathBitacora,strContenido,strError);
         }
         else
         {
