@@ -47,20 +47,79 @@ public class MetodosBitacora {
     {
         if (ValidarEscritura(pathDescBitacora)==true) {
              File Archivo = new File(pathBitacora);
-        if (Archivo.exists()) 
-        { 
-            BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
-            String last = br.readLine(); 
-            while (last != null) 
+            if (Archivo.exists()) 
             { 
-                LlenarArchivo(pathMaster,last,strError);
-                last = br.readLine(); 
-            } 
-        }
+                BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
+                String last = br.readLine(); 
+                while (last != null) 
+                { 
+                    LlenarArchivo(pathMaster,last,strError);
+                    last = br.readLine(); 
+                } 
+            }
+            LlenarArchivo(pathMaster,strContenido,strError);
+            BufferedWriter bw = new BufferedWriter(new FileWriter(pathBitacora));
+            bw.write("");
+            bw.close();
         }
         else
         {
             LlenarArchivo(pathBitacora,strContenido,strError);
+        }
+    }
+    
+    public String[] retorno(String[] array)
+    {
+        if (array!=null) {
+        array[0] =quitarCaracteres(array[0]);
+        array[1] =quitarCaracteres(array[1]);
+        array[2] =quitarCaracteres(array[2]);
+        array[3] =quitarCaracteres(array[3]);
+        array[4] =quitarCaracteres(array[4]);
+        array[5] =quitarCaracteres(array[5]);
+        array[6] =quitarCaracteres(array[6]);
+        array[7] =quitarCaracteres(array[7]);
+        array[8] =quitarCaracteres(array[8]);
+        array[9] =quitarCaracteres(array[9]);
+        return array;    
+        }
+        else
+        {
+            return array;
+        }
+        
+    }
+    public String[] buscar(String path, String usuario) throws FileNotFoundException, IOException
+    {
+        String[] objeto2 = null;
+        File Archivo = new File(path);
+        BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
+        String last = br.readLine(); 
+        while (last != null) 
+        { 
+            String[] objeto= last.split("//");
+            String nuevo = quitarCaracteres(objeto[0]);
+            if (nuevo.equals(usuario)) {
+                objeto2 = objeto;
+            }
+            
+            last = br.readLine(); 
+        } 
+        return retorno(objeto2);
+    }
+    
+    //Solo validar el vector va vacio osea null
+    public String[] login(String pathBitacora, String pathMaster,String usuario) throws IOException
+    {
+        String[] objeto3 = buscar(pathBitacora,usuario);
+        if (objeto3!=null) 
+        {
+            return objeto3;
+        }
+        else
+        {
+            objeto3 = buscar(pathMaster,usuario);
+            return objeto3;
         }
     }
     
