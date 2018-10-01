@@ -42,7 +42,7 @@ public class MetodosBitacora {
         } 
         
     }
-    public void LlenarArchivo2(String strPath,String strContenido,String strError)
+    public void LlenarArchivo2(String strContenido,String strError)
     {
         
         File Archivo5 = new File("C:/MEIA/desc_bitacora.txt");
@@ -81,7 +81,7 @@ public class MetodosBitacora {
                 while (last != null) 
                 { 
                     LlenarArchivo(pathMaster,last,strError);
-                    LlenarArchivo(pathDescUsuario,last2,strError);
+                    LlenarArchivo2(last2,strError);
                     last = br.readLine(); 
                     last2 = br2.readLine();
                 } 
