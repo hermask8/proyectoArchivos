@@ -21,7 +21,7 @@ import javax.swing.DefaultListModel;
  */
 public class MetodosBitacora {
     
-    public boolean LlenarArchivo(String strPath,String strContenido,String strError)
+    public void LlenarArchivo(String strPath,String strContenido,String strError)
     {
         
         File Archivo = new File(strPath);
@@ -35,14 +35,33 @@ public class MetodosBitacora {
                 bw.close();
                 Escribir.close();
                 
-                return true;
         }
         catch(IOException ex)
         {
             strError= ex.getMessage();
-            return false;
         } 
         
+    }
+    
+    public void Escribir(String pathDescBitacora,String pathBitacora,String pathMaster,String strContenido,String strError) throws IOException
+    {
+        if (ValidarEscritura(pathDescBitacora)==true) {
+             File Archivo = new File(pathBitacora);
+        if (Archivo.exists()) 
+        { 
+            BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
+            String last = br.readLine(); 
+            while (last != null) 
+            { 
+                LlenarArchivo(pathMaster,last,strError);
+                last = br.readLine(); 
+            } 
+        }
+        }
+        else
+        {
+            LlenarArchivo(pathBitacora,strContenido,strError);
+        }
     }
     
     public boolean Obtener(String strPath,String strError)
@@ -104,11 +123,16 @@ public class MetodosBitacora {
             while (last != null) 
             { 
                 String[] valido = last.split("//");
-                while(usuario.length() < 20){
-                    usuario = "%" + usuario;
+                String comparar = quitarCaracteres(valido[0]);
+                validar2 = comparar.equals(usuario);
+                if (validar2==true) {
+                    last = null;
                 }
-                validar2 = valido[0].equals(usuario);
-                last = br.readLine();
+                else
+                {
+                    last = br.readLine();
+                }
+                
             } 
         return validar2;
     }
@@ -137,17 +161,28 @@ public class MetodosBitacora {
     
     public boolean ValidarEscritura(String strPath ) throws IOException
     {
-        String[] objeto = leerUltimaLinea(strPath).split("|");
+        String[] objeto = leerUltimaLinea(strPath).split("//");
         int validar = Integer.valueOf(objeto[5]) / Integer.valueOf(objeto[8]) ;
         objeto = null;
         return validar ==0;
     }
     
-    public void escribirMaster()
-    {
-        
-    }
+  
     
+    public String quitarCaracteres(String textoEntero)
+    {
+        StringBuilder texto = new StringBuilder();
+        char separador = '%';
+        for(int i = 0;i<textoEntero.length(); i++)
+        {
+            char separador2 = textoEntero.charAt(i);
+            if (String.valueOf(separador).equals(String.valueOf(separador2))) {
+                texto.append(separador2);
+            }
+        }
+        
+        return texto.toString();
+    }
     public void escribirDescBitacora()
     {
         
