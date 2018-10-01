@@ -342,14 +342,15 @@ public class VentanaVistaAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCrearUsuarioActionPerformed
 
     private void btnBackupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackupActionPerformed
+        MetodosBitacora mb = new MetodosBitacora();
+        
         JFileChooser fc = new JFileChooser();
         fc.setDialogTitle("Especificar ruta del backup");
-        InputStream origen;
-        OutputStream destino;
         int userSelection = fc.showSaveDialog(this);
         
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File guardar = fc.getSelectedFile();
+            mb.Backup("‪C:/MEIA", guardar.getPath());
         }
         
         
