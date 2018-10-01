@@ -278,7 +278,8 @@ public class VentanaUsuarios extends javax.swing.JFrame {
                     Usuarios u = new Usuarios(txtUsuario.getText(),txtNombre.getText(),txtApellido.getText(),txtContraseña.getText(),'1', fecha,txtCorreo.getText(), 
                     Integer.parseInt(txtTelefono.getText()),archivo.getPath(),'0');
                     mb.LlenarArchivo("C:/MEIA/usuarios.txt", u.ConvertirATextoTamañoFijo(), "error");
-                    u.GuardarFoto(archivo.getPath(), imagen);
+                    String path = archivo.getAbsolutePath();
+                    u.CopiarImagen(path, txtUsuario.getText());
 
                 }
             } catch (IOException ex) {

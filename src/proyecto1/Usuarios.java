@@ -71,26 +71,26 @@ public class Usuarios {
             this.Status=status;
         }
         
-        public void GuardarFoto(String path, byte[] imagen){
-            
-            contadorDeFotos++;
+        public String CopiarImagen(String ruta1, String nombre)
+         {
             try
             {
-                FileInputStream fis = new FileInputStream(path); 
-                FileOutputStream fos = new FileOutputStream("‪C:\\MEIA\\fotografia\\FotoDePerfil" + contadorDeFotos );
+                FileInputStream fis = new FileInputStream(ruta1);
+                FileOutputStream fos = new FileOutputStream("C:/MEIA/fotografia/"+nombre+".jpg");
                 FileChannel inChannel = fis.getChannel(); 
                 FileChannel outChannel = fos.getChannel(); 
                 inChannel.transferTo(0, inChannel.size(), outChannel); 
                 fis.close(); 
                 fos.close();
             }
-             
+
             catch(IOException e)
             {
-                
-                
-        }
-        }
+
+            } 
+            
+            return "C:/MEIA/Fotografias/"+nombre+".jpg";
+         }
         
         
         public String ConvertirATextoTamañoFijo()
