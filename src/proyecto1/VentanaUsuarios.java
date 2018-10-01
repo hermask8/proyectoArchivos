@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.Instant;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -271,16 +272,40 @@ public class VentanaUsuarios extends javax.swing.JFrame {
             
             if (imagen != null) {
                 try {
-                if (mb.validarUsuario("C:/MEIA/usuarios.txt", txtUsuario.getText())) {
+                    boolean validar3 = mb.validarUsuario("C:/MEIA/usuarios.txt", txtUsuario.getText());
+                if (mb.validarUsuario("C:/MEIA/usuarios.txt",txtUsuario.getText()) == true) {
                     JOptionPane.showMessageDialog(null,"Nombre de Usuario existente, por favor escoja otro nombre de usuario");
                 }else{
                     Date fecha = new Date(Integer.parseInt(txtAño.getText()), Integer.parseInt(txtMes.getText()), Integer.parseInt(txtDia.getText()));
-                    Usuarios u = new Usuarios(txtUsuario.getText(),txtNombre.getText(),txtApellido.getText(),txtContraseña.getText(),'1', fecha,txtCorreo.getText(), 
-                    Integer.parseInt(txtTelefono.getText()),archivo.getPath(),'0');
-                    mb.LlenarArchivo("C:/MEIA/usuarios.txt", u.ConvertirATextoTamañoFijo(), "error");
+                    MetodosUsuarios mu = new MetodosUsuarios();
                     String path = archivo.getAbsolutePath();
-                    u.CopiarImagen(path, txtUsuario.getText());
-
+                    //Agregar usuario
+                    Usuarios u = new Usuarios(txtUsuario.getText(),txtNombre.getText(),txtApellido.getText(),txtContraseña.getText(),'1', fecha,txtCorreo.getText(), 
+                    Integer.parseInt(txtTelefono.getText()),mu.CopiarImagen(path, txtUsuario.getText()),'0');
+                    
+                    mb.Escribir(u.ConvertirATextoTamañoFijo(),"Error");
+                    DescBitacora db = new DescBitacora();
+                    db.NombreSimbolico = txtUsuario.getText();
+                    db.usuarioModificacion = txtUsuario.getText();
+                    Date date = new Date();
+                    db.FechaModificacion = date;
+                    String ultimaLinea = mb.leerUltimaLinea("C:/MEIA/desc_bitacora.txt");
+                    if (!ultimaLinea.equals("")) {
+                        String [] ArregloUltima = ultimaLinea.split("//");
+                       // ultimaLinea = mb.quitarCaracteres(ArregloUltima[5]);
+                        db.NumeroRegistros = Integer.parseInt(ArregloUltima[5])+1;
+                        db.MaxReorganizacion = 5;
+                        db.UsuarioCreacion = txtUsuario.getText();
+                        mb.LlenarArchivo2("‪C:MEIA/desc_bitacora.txt", db.ConvertirATextoTamañoFijo(), "Error");
+                    }else{
+                        db.MaxReorganizacion = 5;
+                        db.UsuarioCreacion = txtUsuario.getText();
+                        db.NumeroRegistros = 1;
+                        mb.LlenarArchivo2("‪C:MEIA/desc_bitacora.txt", db.ConvertirATextoTamañoFijo(), "Error");
+                    }
+    
+                     
+   
                 }
             } catch (IOException ex) {
             Logger.getLogger(VentanaUsuarios.class.getName()).log(Level.SEVERE, null, ex);

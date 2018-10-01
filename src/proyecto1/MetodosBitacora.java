@@ -24,11 +24,11 @@ public class MetodosBitacora {
     public void LlenarArchivo(String strPath,String strContenido,String strError)
     {
         
-        File Archivo = new File(strPath);
+        File Archivo5 = new File(strPath);
         
         try
         {
-                FileWriter Escribir = new FileWriter(Archivo,true);
+                FileWriter Escribir = new FileWriter(Archivo5,true);
                 BufferedWriter bw = new BufferedWriter(Escribir);
                 
                 bw.write(strContenido + System.lineSeparator());
@@ -42,9 +42,33 @@ public class MetodosBitacora {
         } 
         
     }
-    
-    public void Escribir(String pathDescBitacora,String pathBitacora,String pathMaster,String strContenido,String strError) throws IOException
+    public void LlenarArchivo2(String strPath,String strContenido,String strError)
     {
+        
+        File Archivo5 = new File("C:/MEIA/desc_bitacora.txt");
+        
+        try
+        {
+                FileWriter Escribir = new FileWriter(Archivo5,true);
+                BufferedWriter bw = new BufferedWriter(Escribir);
+                
+                bw.write(strContenido + System.lineSeparator());
+                bw.close();
+                Escribir.close();
+                
+        }
+        catch(IOException ex)
+        {
+            strError= ex.getMessage();
+        } 
+        
+    }
+    public void Escribir(String strContenido,String strError) throws IOException
+    {
+        String pathDescBitacora = "C:/MEIA/desc_bitacora.txt";
+        String pathBitacora = "C:/MEIA/bitacora.txt";
+        String pathMaster = "C:/MEIA/usuarios.txt";
+        
         if (ValidarEscritura(pathDescBitacora)==true) {
              File Archivo = new File(pathBitacora);
             if (Archivo.exists()) 
@@ -93,8 +117,8 @@ public class MetodosBitacora {
     {
         String[] objeto2 = null;
         File Archivo = new File(path);
-        BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
-        String last = br.readLine(); 
+        BufferedReader br2 = new BufferedReader(new FileReader(Archivo));
+        String last = br2.readLine(); 
         while (last != null) 
         { 
             String[] objeto= last.split("//");
@@ -103,14 +127,17 @@ public class MetodosBitacora {
                 objeto2 = objeto;
             }
             
-            last = br.readLine(); 
+            last = br2.readLine(); 
         } 
+        br2.close();
         return retorno(objeto2);
     }
     
     //Solo validar el vector va vacio osea null
-    public String[] login(String pathBitacora, String pathMaster,String usuario) throws IOException
+    public String[] login(String usuario) throws IOException
     {
+        String pathBitacora = "C:/MEIA/usuarios.txt";
+        String pathMaster = "C:/MEIA/bitacora.txt";
         String[] objeto3 = buscar(pathBitacora,usuario);
         if (objeto3!=null) 
         {
@@ -192,7 +219,8 @@ public class MetodosBitacora {
                     last = br.readLine();
                 }
                 
-            } 
+            }
+        br.close();
         return validar2;
     }
     
@@ -205,25 +233,28 @@ public class MetodosBitacora {
     {
         String lastLine= "";
         File Archivo = new File(strPath);
-        if (Archivo.exists()) 
-        { 
-            BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
+        
+        BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
             String last = br.readLine(); 
             while (last != null) 
             { 
             lastLine = last; 
             last = br.readLine(); 
             } 
-        }
+        br.close();
         return lastLine;
     }
     
     public boolean ValidarEscritura(String strPath ) throws IOException
     {
-        String[] objeto = leerUltimaLinea(strPath).split("//");
-        int validar = Integer.valueOf(objeto[5]) / Integer.valueOf(objeto[8]) ;
+        if (!leerUltimaLinea(strPath).equals("")) {
+            String[] objeto = leerUltimaLinea(strPath).split("//");
+        int validar = Integer.valueOf(objeto[5]) / Integer.valueOf(objeto[8]);
         objeto = null;
-        return validar ==0;
+        return validar == 0;
+        }else{
+            return false;
+        }
     }
     
   
@@ -235,7 +266,7 @@ public class MetodosBitacora {
         for(int i = 0;i<textoEntero.length(); i++)
         {
             char separador2 = textoEntero.charAt(i);
-            if (String.valueOf(separador).equals(String.valueOf(separador2))) {
+            if (!String.valueOf(separador).equals(String.valueOf(separador2))) {
                 texto.append(separador2);
             }
         }

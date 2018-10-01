@@ -19,6 +19,7 @@ public class DescBitacora {
     Date fechaCreacion;
     String UsuarioCreacion;
     Date FechaModificacion;
+    String usuarioModificacion;
     int NumeroRegistros;
     int RegistrosActivos;
     int RegistrosInactivos;
@@ -36,7 +37,7 @@ public class DescBitacora {
             this.MaxReorganizacion = 0;
         }
 
-        public DescBitacora(String nombreSimbolico, Date CreacionFecha, String CreacionUsuario, Date ModificacionFecha, int RegistrosNumero, int ActivosRegistros,int InactivosRegistros, int organizacionMax)
+        public DescBitacora(String nombreSimbolico, Date CreacionFecha, String CreacionUsuario, Date ModificacionFecha,String modificacionUsuario, int RegistrosNumero, int ActivosRegistros,int InactivosRegistros, int organizacionMax)
         {
             this.NombreSimbolico = nombreSimbolico;
             this.fechaCreacion = CreacionFecha;
@@ -46,6 +47,7 @@ public class DescBitacora {
             this.RegistrosActivos = ActivosRegistros;
             this.RegistrosInactivos = InactivosRegistros;
             this.MaxReorganizacion = organizacionMax;
+            this.usuarioModificacion = modificacionUsuario;
         }   
 
         public String ConvertirATextoTamañoFijo()
@@ -59,6 +61,8 @@ public class DescBitacora {
             sb.append("//");
             sb.append(FechaModificacion.toString());
             sb.append("//");
+            sb.append(usuarioModificacion);
+            sb.append("//");
             sb.append(NumeroRegistros);
             sb.append("//");
             sb.append(RegistrosActivos);
@@ -70,4 +74,6 @@ public class DescBitacora {
             return sb.toString();
         }
     
+        
+        
 }

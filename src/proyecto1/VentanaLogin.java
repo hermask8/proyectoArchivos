@@ -5,6 +5,10 @@
  */
 package proyecto1;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author ervi
@@ -128,6 +132,34 @@ public class VentanaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistroActionPerformed
 
     private void btnInisiarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInisiarSesionActionPerformed
+        MetodosBitacora mb = new MetodosBitacora();
+        try {
+            String UsuarioActual[] = mb.login(txtUsuario.getText());
+            
+            if (UsuarioActual != null) {
+                if(txtUsuario.getText().equals(UsuarioActual[0])){
+                    if (txtContraseña.getText().equals(UsuarioActual[3])) {
+                        VentanaVistaUsuarios vvu = new VentanaVistaUsuarios();
+                        VentanaVistaAdmin vva = new VentanaVistaAdmin();
+                        if(UsuarioActual[4].equals("1")){
+                            vva.setVisible(true);
+                            this.setVisible(false);
+                        }else{
+                            vvu.setVisible(true);
+                            this.setVisible(false);
+                        }
+                    }else{
+                        //Usuario o contraseña no coinciden
+                    }
+                }
+            }else{
+                //no encontro usuario
+            }
+            
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
             
     }//GEN-LAST:event_btnInisiarSesionActionPerformed
 

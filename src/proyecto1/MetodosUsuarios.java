@@ -7,8 +7,11 @@ package proyecto1;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 
 /**
  *
@@ -36,6 +39,28 @@ public class MetodosUsuarios {
         } 
         
     }
+    
+    public String CopiarImagen(String ruta1, String nombre)
+         {
+            try
+            {
+                FileInputStream fis = new FileInputStream(ruta1);
+                FileOutputStream fos = new FileOutputStream("C:/MEIA/fotografia/"+nombre+".jpg");
+                FileChannel inChannel = fis.getChannel(); 
+                FileChannel outChannel = fos.getChannel(); 
+                inChannel.transferTo(0, inChannel.size(), outChannel); 
+                fis.close(); 
+                fos.close();
+            }
+
+            catch(IOException e)
+            {
+
+            } 
+            
+            return "C:/MEIA/Fotografias/"+nombre+".jpg";
+         }
+    
     
     public void escribirDescMaster()
     {
