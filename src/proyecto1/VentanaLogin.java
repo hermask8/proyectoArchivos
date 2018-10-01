@@ -128,7 +128,7 @@ public class VentanaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistroActionPerformed
 
     private void btnInisiarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInisiarSesionActionPerformed
-        
+            
     }//GEN-LAST:event_btnInisiarSesionActionPerformed
 
     /**
