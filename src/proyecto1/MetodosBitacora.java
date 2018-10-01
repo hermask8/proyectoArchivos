@@ -287,9 +287,9 @@ public class MetodosBitacora {
     {
         if (!leerUltimaLinea(strPath).equals("")) {
             String[] objeto = leerUltimaLinea(strPath).split("//");
-        int validar = Integer.valueOf(objeto[5]) / Integer.valueOf(objeto[8]);
+        boolean validar = Integer.valueOf(objeto[8]) == Integer.valueOf(objeto[5]);
         objeto = null;
-        return validar == 0;
+        return validar;
         }else{
             return false;
         }

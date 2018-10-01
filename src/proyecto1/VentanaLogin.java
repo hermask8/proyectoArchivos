@@ -8,6 +8,7 @@ package proyecto1;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -150,10 +151,16 @@ public class VentanaLogin extends javax.swing.JFrame {
                         }
                     }else{
                         //Usuario o contraseña no coinciden
+                        JOptionPane.showMessageDialog(null,"El usuario no coincide con la contraseña");
+                        txtUsuario.setText("");
+                        txtContraseña.setText("");
                     }
                 }
             }else{
                 //no encontro usuario
+                JOptionPane.showMessageDialog(null,"Usuario no encontrado");
+                txtUsuario.setText("");
+                txtContraseña.setText("");
             }
             
         } catch (IOException ex) {
