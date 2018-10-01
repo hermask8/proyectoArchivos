@@ -68,23 +68,33 @@ public class MetodosBitacora {
         String pathDescBitacora = "C:/MEIA/desc_bitacora.txt";
         String pathBitacora = "C:/MEIA/bitacora.txt";
         String pathMaster = "C:/MEIA/usuarios.txt";
-        
+        String pathDescUsuario = "C:/MEIA/desc_usuario.txt";
         if (ValidarEscritura(pathDescBitacora)==true) {
              File Archivo = new File(pathBitacora);
+             File Archivo2 = new File(pathDescBitacora);
             if (Archivo.exists()) 
             { 
                 BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
+                BufferedReader br2 = new BufferedReader(new FileReader(Archivo2)); 
                 String last = br.readLine(); 
+                String last2 = br.readLine(); 
                 while (last != null) 
                 { 
                     LlenarArchivo(pathMaster,last,strError);
+                    LlenarArchivo(pathDescUsuario,last2,strError);
                     last = br.readLine(); 
+                    last2 = br2.readLine();
                 } 
+                br.close();
+                br2.close();
             }
             LlenarArchivo(pathMaster,strContenido,strError);
             BufferedWriter bw = new BufferedWriter(new FileWriter(pathBitacora));
             bw.write("");
             bw.close();
+            BufferedWriter bw2 = new BufferedWriter(new FileWriter(pathDescBitacora));
+            bw2.write("");
+            bw2.close();
         }
         else
         {
