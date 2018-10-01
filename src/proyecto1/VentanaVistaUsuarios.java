@@ -1,5 +1,7 @@
 package proyecto1;
 
+import java.io.IOException;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -215,6 +217,23 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
                 new VentanaVistaUsuarios().setVisible(true);
             }
         });
+    }
+    
+    public String[] retornoInformacion(String path, String usuario) throws IOException
+    {
+        
+        MetodosBitacora mb = new MetodosBitacora();
+        String[] nuevo= mb.buscar(path, usuario);
+        for(int i=0; i<nuevo.length;i++)
+        {
+            nuevo[i] = mb.quitarCaracteres(nuevo[i]);
+        }
+        return nuevo;
+    }
+    
+    public void llenartxt(String path,String usuario) throws IOException
+    {
+        String nuevos[] = retornoInformacion(path,usuario);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
