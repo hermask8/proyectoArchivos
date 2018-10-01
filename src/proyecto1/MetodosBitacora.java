@@ -8,10 +8,14 @@ package proyecto1;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import javax.swing.DefaultListModel;
 
@@ -49,12 +53,12 @@ public class MetodosBitacora {
         
         try
         {
-                FileWriter Escribir = new FileWriter(Archivo5,true);
-                BufferedWriter bw = new BufferedWriter(Escribir);
+                FileWriter Escribir2 = new FileWriter(Archivo5,true);
+                BufferedWriter bw = new BufferedWriter(Escribir2);
                 
                 bw.write(strContenido + System.lineSeparator());
                 bw.close();
-                Escribir.close();
+                Escribir2.close();
                 
         }
         catch(IOException ex)
@@ -102,6 +106,29 @@ public class MetodosBitacora {
             LlenarArchivo(pathBitacora,strContenido,strError);
         }
     }
+    
+    public void Backup(String ori, String des){
+        File origen = new File("C:/MEIA");
+        File destino = new File(des);
+        try{
+            InputStream in = new FileInputStream(origen);
+            OutputStream out = new FileOutputStream(destino);
+            
+            byte[] buf = new byte[1024];
+            int len;
+
+            while ((len = in.read(buf)) > 0) {
+              out.write(buf, 0, len);
+            }
+
+            in.close();
+            out.close();
+            
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+    
     
     public String[] retorno(String[] array)
     {
