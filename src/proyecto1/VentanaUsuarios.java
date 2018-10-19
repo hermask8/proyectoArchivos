@@ -309,9 +309,10 @@ public class VentanaUsuarios extends javax.swing.JFrame {
                     else
                     {
                         String [] ArregloUltima = ultimaLinea.split("//");
-                        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yy-MM-dd");
-                        Date date = formatoDelTexto.parse(mb.quitarCaracteres(ArregloUltima[2]));
-                        Date date2 = new Date();
+                       // SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yy-MM-dd");
+                       // Date date = formatoDelTexto.parse(mb.quitarCaracteres(ArregloUltima[2]));
+                        Date date = new Date();
+                       Date date2 = new Date();
                         DescBitacora desBitacora = new DescBitacora(txtUsuario.getText(),date,txtUsuario.getText(),date2,txtUsuario.getText(),Integer.valueOf(mb.quitarCaracteres(ArregloUltima[5]))+1,Integer.valueOf(mb.quitarCaracteres(ArregloUltima[6]))+1,Integer.valueOf(mb.quitarCaracteres(ArregloUltima[7])),Integer.valueOf(mb.quitarCaracteres(ArregloUltima[8])));
                         BufferedWriter bw = new BufferedWriter(new FileWriter("C:/MEIA/desc_bitacora.txt"));
                         bw.write("");
