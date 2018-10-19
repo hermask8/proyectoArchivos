@@ -290,13 +290,13 @@ public class VentanaUsuarios extends javax.swing.JFrame {
                     if(numero==0)
                     {
                         u = new Usuarios(txtUsuario.getText(),txtNombre.getText(),txtApellido.getText(),txtContraseña.getText(),'1', fecha,txtCorreo.getText(), 
-                    Integer.parseInt(txtTelefono.getText()),mu.CopiarImagen(path, txtUsuario.getText()),'0');
+                    Integer.parseInt(txtTelefono.getText()),mu.CopiarImagen(path, txtUsuario.getText()),'1');
                         numero++;
                     }
                     else
                     {
                         u = new Usuarios(txtUsuario.getText(),txtNombre.getText(),txtApellido.getText(),txtContraseña.getText(),'0', fecha,txtCorreo.getText(), 
-                    Integer.parseInt(txtTelefono.getText()),mu.CopiarImagen(path, txtUsuario.getText()),'0');
+                    Integer.parseInt(txtTelefono.getText()),mu.CopiarImagen(path, txtUsuario.getText()),'1');
                     }
                     mb.Escribir(u.ConvertirATextoTamañoFijo(),"Error");
                     String ultimaLinea = mb.leerUltimaLinea("C:/MEIA/desc_bitacora.txt");
