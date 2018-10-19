@@ -5,15 +5,20 @@
  */
 package proyecto1;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import static javax.print.attribute.Size2DSyntax.MM;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -294,10 +299,36 @@ public class VentanaUsuarios extends javax.swing.JFrame {
                     Integer.parseInt(txtTelefono.getText()),mu.CopiarImagen(path, txtUsuario.getText()),'0');
                     }
                     mb.Escribir(u.ConvertirATextoTamañoFijo(),"Error");
+                    String ultimaLinea = mb.leerUltimaLinea("C:/MEIA/desc_bitacora.txt");
+                    if (ultimaLinea.equals("")) 
+                    {
+                        Date date = new Date();
+                        DescBitacora desBitacora = new DescBitacora(txtUsuario.getText(),date,txtUsuario.getText(),date,txtUsuario.getText(),numero,numero,0,5);
+                        mb.LlenarArchivo2(desBitacora.ConvertirATextoTamañoFijo(), "ERROR");
+                    }
+                    else
+                    {
+                        String [] ArregloUltima = ultimaLinea.split("//");
+                        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yy-MM-dd");
+                        Date date = formatoDelTexto.parse(mb.quitarCaracteres(ArregloUltima[2]));
+                        Date date2 = new Date();
+                        DescBitacora desBitacora = new DescBitacora(txtUsuario.getText(),date,txtUsuario.getText(),date2,txtUsuario.getText(),Integer.valueOf(mb.quitarCaracteres(ArregloUltima[5]))+1,Integer.valueOf(mb.quitarCaracteres(ArregloUltima[6]))+1,Integer.valueOf(mb.quitarCaracteres(ArregloUltima[7])),Integer.valueOf(mb.quitarCaracteres(ArregloUltima[8])));
+                        BufferedWriter bw = new BufferedWriter(new FileWriter("C:/MEIA/desc_bitacora.txt"));
+                        bw.write("");
+                        bw.close();
+                        mb.LlenarArchivo2(desBitacora.ConvertirATextoTamañoFijo(), "ERROR");
+                    }
                     
+                    
+                    
+                   
+                    /*
                     DescBitacora db = new DescBitacora();
                     db.NombreSimbolico = txtUsuario.getText();
                     db.usuarioModificacion = txtUsuario.getText();
+                    db.NumeroRegistros = numero;
+                    numero++;
+                    db.RegistrosActivos = numero;
                     Date date = new Date();
                     db.FechaModificacion = date;
                     String ultimaLinea = mb.leerUltimaLinea("C:/MEIA/desc_bitacora.txt");
@@ -307,14 +338,14 @@ public class VentanaUsuarios extends javax.swing.JFrame {
                         db.NumeroRegistros = Integer.parseInt(ArregloUltima[5])+1;
                         db.MaxReorganizacion = 5;
                         db.UsuarioCreacion = txtUsuario.getText();
-                        mb.LlenarArchivo2("‪C:MEIA/desc_bitacora.txt", db.ConvertirATextoTamañoFijo(), "Error");
+                        mb.LlenarArchivo2(db.ConvertirATextoTamañoFijo(), "Error");
                     }else{
                         db.MaxReorganizacion = 5;
                         db.UsuarioCreacion = txtUsuario.getText();
                         db.NumeroRegistros = 1;
-                        mb.LlenarArchivo2("‪C:MEIA/desc_bitacora.txt", db.ConvertirATextoTamañoFijo(), "Error");
+                        mb.LlenarArchivo2(db.ConvertirATextoTamañoFijo(), "Error");
                     }
-    
+                    */
                      VentanaLogin vl = new VentanaLogin();
                      vl.setVisible(true);
                      this.setVisible(false);
@@ -322,7 +353,9 @@ public class VentanaUsuarios extends javax.swing.JFrame {
                 }
             } catch (IOException ex) {
             Logger.getLogger(VentanaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }   catch (ParseException ex) {
+                    Logger.getLogger(VentanaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }else{
                 JOptionPane.showMessageDialog(null,"Seleccione foto de perfil");
             }
