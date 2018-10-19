@@ -31,7 +31,7 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblUsuario = new javax.swing.JLabel();
         txtContraseña = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -79,8 +79,8 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Logo/LOGO_MEIA2 (2).png"))); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel2.setText("Nombre de Usuario");
+        lblUsuario.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblUsuario.setText("Nombre de Usuario");
 
         jLabel3.setText("Contraseña:");
 
@@ -316,7 +316,7 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
                                     .addComponent(jLabel9)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel2)))
+                                .addComponent(lblUsuario)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -329,7 +329,7 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(64, 64, 64)
-                        .addComponent(jLabel2)
+                        .addComponent(lblUsuario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -461,7 +461,6 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -476,6 +475,7 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel lblMostrar;
+    public javax.swing.JLabel lblUsuario;
     private javax.swing.JTextField txtAsociado;
     private javax.swing.JTextField txtAsociadoB;
     private javax.swing.JTextField txtAño;

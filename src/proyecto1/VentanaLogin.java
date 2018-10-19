@@ -144,6 +144,7 @@ public class VentanaLogin extends javax.swing.JFrame {
                         VentanaVistaAdmin vva = new VentanaVistaAdmin();
                         if(UsuarioActual[4].equals("1")){
                             vva.setVisible(true);
+                            
                             this.setVisible(false);
                         }else{
                             vvu.setVisible(true);
