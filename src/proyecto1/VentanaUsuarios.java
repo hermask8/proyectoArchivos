@@ -354,9 +354,7 @@ public class VentanaUsuarios extends javax.swing.JFrame {
                 }
             } catch (IOException ex) {
             Logger.getLogger(VentanaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
-            }   catch (ParseException ex) {
-                    Logger.getLogger(VentanaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            }
             }else{
                 JOptionPane.showMessageDialog(null,"Seleccione foto de perfil");
             }
