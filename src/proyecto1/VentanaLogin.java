@@ -134,6 +134,8 @@ public class VentanaLogin extends javax.swing.JFrame {
 
     private void btnInisiarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInisiarSesionActionPerformed
         MetodosBitacora mb = new MetodosBitacora();
+        
+        
         try {
             String UsuarioActual[] = mb.login(txtUsuario.getText());
             
@@ -144,10 +146,11 @@ public class VentanaLogin extends javax.swing.JFrame {
                         VentanaVistaAdmin vva = new VentanaVistaAdmin();
                         if(UsuarioActual[4].equals("1")){
                             vva.setVisible(true);
-                            
+                            vva.lblUsuarioAdmin.setText(txtUsuario.getText());
                             this.setVisible(false);
                         }else{
                             vvu.setVisible(true);
+                            vvu.lblUsuario.setText(txtUsuario.getText());
                             this.setVisible(false);
                         }
                     }else{

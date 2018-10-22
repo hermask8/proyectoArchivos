@@ -46,6 +46,7 @@ public class MetodosBitacora {
         } 
         
     }
+    
     public void LlenarArchivo2(String strContenido,String strError)
     {
         
