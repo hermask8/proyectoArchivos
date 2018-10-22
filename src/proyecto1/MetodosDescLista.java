@@ -21,7 +21,7 @@ import java.util.Date;
 public class MetodosDescLista {
     
     
-    public String OrganizacionDeDatos(String usuario, int registros, int activos, int inactivos, int reorganizacion)
+    public String OrganizacionDeDatos(String usuario, int registros, int reorganizacion) throws IOException
         {
             StringBuilder sb = new StringBuilder();
 
@@ -32,15 +32,59 @@ public class MetodosDescLista {
             sb.append("//");
             sb.append(registros);
             sb.append("//");
-            sb.append(activos);
+            sb.append(registrosActivos());
             sb.append("//");
-            sb.append(inactivos);
+            sb.append(registrosInactivos());
             sb.append("//");
             sb.append(reorganizacion);
            
             return sb.toString();
         }
     
+    
+    public int registrosActivos() throws FileNotFoundException, IOException{
+        
+        int cont = 0;
+        File Archivo = new File("C:/MEIA/Listas.txt");
+        String [] lineaSeparada;
+        BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
+        String last = br.readLine();
+        while (last != null) 
+        { 
+            last = br.readLine();
+            lineaSeparada = last.split("//");
+            if(quitarCaracteres(lineaSeparada[4]) == "1"){
+                cont++;
+            }
+        }    
+        
+        br.close();
+        
+        
+        return cont;
+    }
+    
+    public int registrosInactivos() throws FileNotFoundException, IOException{
+        
+        int cont = 0;
+        File Archivo = new File("C:/MEIA/Listas.txt");
+        String [] lineaSeparada;
+        BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
+        String last = br.readLine();
+        while (last != null) 
+        { 
+            last = br.readLine();
+            lineaSeparada = last.split("//");
+            if(quitarCaracteres(lineaSeparada[4]) == "0"){
+                cont++;
+            }
+        }    
+        
+        br.close();
+        
+        
+        return cont;
+    }
     
     
     
@@ -111,5 +155,20 @@ public class MetodosDescLista {
         return cont;
     }
     
+    public String quitarCaracteres(String textoEntero)
+    {
+        StringBuilder texto = new StringBuilder();
+        char separador = '%';
+        for(int i = 0;i<textoEntero.length(); i++)
+        {
+            char separador2 = textoEntero.charAt(i);
+            if (!String.valueOf(separador).equals(String.valueOf(separador2))) {
+                texto.append(separador2);
+            }
+        }
+        
+        return texto.toString();
+    }
     
+   
 }

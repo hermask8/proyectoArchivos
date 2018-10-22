@@ -375,16 +375,16 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
                     String linea = l.ConvertirATextoTamañoFijo();
                     if(mdb.EstaVacio()){
                         //Los que estan en cero son los activos y los inactivos ahi va el metodo de Hilario
-                        String desc = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros(), 0, 0 , 5);
+                        String desc = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros(), 5);
                         mdb.LlenarDescBitacora(desc);
                         if(ml.bitacoraLLena(ml.obtenerTopeBitacora())){
                             ml.LlenarListasMaster();
                             ml.LlenarBitacora(linea, "Error");
-                            String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros(), 0, 0 , 5);
+                            String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros() , 5);
                             mdb.LlenarDescBitacora(desc2);
                         }else{
                             ml.LlenarBitacora(linea, "Error");
-                            String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros(), 0, 0 , 5);
+                            String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros(), 5);
                             mdb.LlenarDescBitacora(desc2);
                         }
                         
@@ -392,11 +392,11 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
                         if(ml.bitacoraLLena(ml.obtenerTopeBitacora())){
                             ml.LlenarListasMaster();
                             ml.LlenarBitacora(linea, "Error");
-                            String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros(), 0, 0 , 5);
+                            String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros() , 5);
                             mdb.LlenarDescBitacora(desc2);
                         }else{
                             ml.LlenarBitacora(linea, "Error");
-                            String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros(), 0, 0 , 5);
+                            String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros(), 5);
                             mdb.LlenarDescBitacora(desc2);
                         }
                     }

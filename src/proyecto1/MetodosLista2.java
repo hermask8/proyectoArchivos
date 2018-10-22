@@ -20,7 +20,7 @@ import java.util.stream.Stream;
  *
  * @author ervi
  */
-public class MetodosLista{
+public class MetodosLista2{
     MetodosBitacora mb = new MetodosBitacora();
     public boolean escribir(String[] usuario,String[] usuarioAsociado,int primero,int posicion) throws IOException
     {
@@ -37,16 +37,18 @@ public class MetodosLista{
                     IndiceListaUsuario miLista  = new IndiceListaUsuario(Integer.valueOf(usuario[0]),usuario[1],usuario[2],usuario[3],usuario[4],Integer.valueOf(usuario[5]),usuario[6]);
                     IndiceListaUsuario miLista2  = new IndiceListaUsuario(Integer.valueOf(usuarioAsociado[0]),usuarioAsociado[1],usuarioAsociado[2],usuarioAsociado[3],usuarioAsociado[4],Integer.valueOf(usuarioAsociado[5]),usuarioAsociado[6]);
                     quitarApuntadoresInservibles(miLista.ToString(),miLista2.ToString(),"");
+                    vaciarArchivo();
                     sobreEscribir(miLista.ToString(),miLista2.ToString(),"");
                 }
                 else
                 {
-                    String[] anterior = buscar("C:/meia",usuario[0]);
+                    String[] anterior = buscar("C:/MEIA/lista1.txt",usuario[0]);
                     anterior[5] = usuarioAsociado[0];
                     usuarioAsociado[5] = usuario[0];
                     IndiceListaUsuario miLista  = new IndiceListaUsuario(Integer.valueOf(anterior[0]),anterior[1],anterior[2],anterior[3],anterior[4],Integer.valueOf(anterior[5]),anterior[6]);
                     IndiceListaUsuario miLista2  = new IndiceListaUsuario(Integer.valueOf(usuarioAsociado[0]),usuarioAsociado[1],usuarioAsociado[2],usuarioAsociado[3],usuarioAsociado[4],Integer.valueOf(usuarioAsociado[5]),usuarioAsociado[6]);
                     quitarApuntadoresInservibles(miLista.ToString(),miLista2.ToString(),"");
+                    vaciarArchivo();
                     sobreEscribir(miLista.ToString(),miLista2.ToString(),"");
                     
                 }
@@ -58,6 +60,7 @@ public class MetodosLista{
                     IndiceListaUsuario miLista  = new IndiceListaUsuario(Integer.valueOf(usuario[0]),usuario[1],usuario[2],usuario[3],usuario[4],Integer.valueOf(usuario[5]),usuario[6]);
                     IndiceListaUsuario miLista2  = new IndiceListaUsuario(Integer.valueOf(usuarioAsociado[0]),usuarioAsociado[1],usuarioAsociado[2],usuarioAsociado[3],usuarioAsociado[4],Integer.valueOf(usuarioAsociado[5]),usuarioAsociado[6]);
                     quitarApuntadoresInservibles(miLista.ToString(),miLista2.ToString(),"");
+                    vaciarArchivo();
                     sobreEscribir(miLista.ToString(),miLista2.ToString(),"");
                     return false;
                 }
@@ -74,7 +77,7 @@ public class MetodosLista{
     
     public void agregar(String[] usuarioAgregar) throws IOException
     {
-        escribir(buscar2("C:meia","0"),usuarioAgregar,1,2);
+        escribir(buscar2("C:/MEIA/lista1.txt","1"),usuarioAgregar,1,2);
     }
     public void quitarApuntadoresInservibles(String registro1,String registro2,String registro3) throws FileNotFoundException, IOException
     {
@@ -82,7 +85,7 @@ public class MetodosLista{
         String pathBitacora = "C:/MEIA/bitacora.txt";
         String pathMaster = "C:/MEIA/usuarios.txt";
         String pathDescUsuario = "C:/MEIA/desc_usuario.txt";
-        File Archivo = new File(pathBitacora);
+        File Archivo = new File("C:/MEIA/lista1.txt");
         BufferedReader br = new BufferedReader(new FileReader(Archivo));  
         String last = br.readLine();  
         while (last != null) 
@@ -92,7 +95,7 @@ public class MetodosLista{
                 String[] excepto = last.split("//");
                 if(!excepto[0].equals(registro1) || !excepto[0].equals(registro2))
                 {
-                    LlenarArchivo(pathMaster,last,"ERROR");
+                    LlenarArchivo("C:/MEIA/lista2.txt",last,"ERROR");
                 }
             }
             else if(!registro1.equals("") && !registro2.equals("") && !registro2.equals(""))
@@ -100,37 +103,39 @@ public class MetodosLista{
                 String[] excepto = last.split("//");
                 if(!excepto[0].equals(registro1) || !excepto[0].equals(registro2) || !excepto[0].equals(registro3) )
                 {
-                    LlenarArchivo(pathMaster,last,"ERROR");
+                    LlenarArchivo("C:/MEIA/lista2.txt",last,"ERROR");
                 }
             }
             last = br.readLine(); 
         } 
         br.close();
     }
+    
+    
      public void sobreEscribir(String registro1, String registro2, String registro3) throws FileNotFoundException, IOException
      {
         String pathDescBitacora = "C:/MEIA/desc_bitacora.txt";
         String pathBitacora = "C:/MEIA/bitacora.txt";
         String pathMaster = "C:/MEIA/usuarios.txt";
         String pathDescUsuario = "C:/MEIA/desc_usuario.txt";
-        File Archivo = new File(pathBitacora);
+        File Archivo = new File("C:/MEIA/lista2.txt");
         BufferedReader br = new BufferedReader(new FileReader(Archivo));  
         String last = br.readLine();  
         while (last != null) 
         { 
-            LlenarArchivo(pathMaster,last,"ERROR");
+            LlenarArchivo("C:/MEIA/lista1.txt",last,"ERROR");
             last = br.readLine(); 
         } 
         if (!registro1.equals("") && !registro2.equals("") && registro2.equals("") ) 
         {
-            LlenarArchivo(pathMaster,registro1,"ERROR");
-            LlenarArchivo(pathMaster,registro2,"ERROR");
+            LlenarArchivo("C:/MEIA/lista1.txt",registro1,"ERROR");
+            LlenarArchivo("C:/MEIA/lista1.txt",registro2,"ERROR");
         }
         else if(!registro1.equals("") && !registro2.equals("") && !registro2.equals(""))
         {
-            LlenarArchivo(pathMaster,registro1,"ERROR");
-            LlenarArchivo(pathMaster,registro2,"ERROR");
-            LlenarArchivo(pathMaster,registro3,"ERROR");
+            LlenarArchivo("C:/MEIA/lista1.txt",registro1,"ERROR");
+            LlenarArchivo("C:/MEIA/lista1.txt",registro2,"ERROR");
+            LlenarArchivo("C:/MEIA/lista1.txt",registro3,"ERROR");
         }
         br.close();
     
@@ -181,7 +186,7 @@ public class MetodosLista{
     }
     public String[] apuntadorSiguiente(int apuntador) throws IOException
     {
-        try (Stream<String> lines = Files.lines(Paths.get("file.txt"))) 
+        try (Stream<String> lines = Files.lines(Paths.get("C:/MEIA/lista1.txt"))) 
         {
             String line = lines.skip(apuntador-1).findFirst().get();
             String[] especificLine = line.split("//");
@@ -272,6 +277,13 @@ public class MetodosLista{
             return array;
         }
         
+    }
+    
+     public void vaciarArchivo() throws FileNotFoundException, IOException
+    {
+        BufferedWriter bw = new BufferedWriter(new FileWriter("C:/MEIA/lista1.txt"));
+        bw.write("");
+        bw.close();
     }
     
 }
