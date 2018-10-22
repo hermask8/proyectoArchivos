@@ -55,7 +55,7 @@ public class MetodosUsuarios {
 
             catch(IOException e)
             {
-
+                        
             } 
             
             return "C:/MEIA/Fotografias/"+nombre+".jpg";

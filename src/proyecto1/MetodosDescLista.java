@@ -12,18 +12,14 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import static proyecto1.Usuarios.padLeft;
 
 /**
  *
  * @author chris
  */
-public class MetodosDescBitacora {
+public class MetodosDescLista {
     
-    Date fecha;
     
     public String OrganizacionDeDatos(String usuario, int registros, int activos, int inactivos, int reorganizacion)
         {
@@ -45,44 +41,23 @@ public class MetodosDescBitacora {
             return sb.toString();
         }
     
-    public int registrosActivos() throws FileNotFoundException, IOException{
-        
-        int cont = 0;
-        File Archivo = new File("C:/MEIA/Listas.txt");
-        String [] lineaSeparada;
-        BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
-        String last = br.readLine();
-        while (last != null) 
-        { 
-            last = br.readLine();
-            lineaSeparada = last.split("//");
-            if(lineaSeparada[3] == "1"){
-                
-            }
-        }    
-        
-        br.close();
-        
-        
-        return 0;
-    }
     
     
     
     
-    public void LlenarDescBitacora(String cadena) throws IOException{
+    public void LlenarDescLista(String cadena) throws IOException{
         
         String strError = "Error";
         
-        BufferedWriter bw12 = new BufferedWriter(new FileWriter("C:/MEIA/Desc_Bitacora_Listas.txt"));
+        BufferedWriter bw12 = new BufferedWriter(new FileWriter("C:/MEIA/Desc_Listas.txt"));
         bw12.write("");
         bw12.close();
         
         
-        File Archivo = new File("C:/MEIA/Desc_Bitacora_Listas.txt");
+        File Archivo = new File("C:/MEIA/Desc_Listas.txt");
         try
         {
-            BufferedWriter bw1 = new BufferedWriter(new FileWriter("C:/MEIA/Desc_Bitacora_Listas.txt"));
+            BufferedWriter bw1 = new BufferedWriter(new FileWriter("C:/MEIA/Desc_Listas.txt"));
             bw1.write("");
             bw1.close();
             
@@ -105,7 +80,7 @@ public class MetodosDescBitacora {
     
     public boolean EstaVacio() throws FileNotFoundException, IOException{
         
-        File Archivo = new File("C:/MEIA/Desc_Bitacora_Listas.txt");
+        File Archivo = new File("C:/MEIA/Desc_Listas.txt");
         BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
             String last = br.readLine();
             
@@ -121,7 +96,7 @@ public class MetodosDescBitacora {
     public int numeroRegistros() throws FileNotFoundException, IOException{
         
         int cont = 0;
-        File Archivo = new File("C:/MEIA/Bitacora_Listas.txt");
+        File Archivo = new File("C:/MEIA/Listas.txt");
         BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
         String last = br.readLine();
         while (last != null) 
