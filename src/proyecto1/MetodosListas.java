@@ -23,6 +23,64 @@ import javax.swing.JOptionPane;
  */
 public class MetodosListas {
     
+    
+    public String BuscarListaBitacora(String usuario, String nombreLista) throws FileNotFoundException, IOException{
+        
+        File Archivo = new File("C:/MEIA/Bitacora_Listas.txt");
+        BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
+            String last = br.readLine();
+            while (last != null) 
+            { 
+                if(!last.equals("")){
+                    String[] valido = last.split("//");
+                
+                    String Lista = quitarCaracteres(valido[0]);
+                    String Us = quitarCaracteres(valido[1]);
+
+                    if(Lista.equals(nombreLista) && Us.equals(usuario)){
+                        br.close();
+                        return Lista;
+                    }
+                    last = br.readLine();
+
+                }else{
+                    return "La lista no existe";
+                }
+            }
+        br.close();
+        return "La lista no existe";
+    }
+    
+    public String BuscarListaMaster(String usuario, String nombreLista) throws FileNotFoundException, IOException{
+        
+        File Archivo = new File("C:/MEIA/Listas.txt");
+        BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
+            String last = br.readLine();
+            while (last != null) 
+            { 
+                if(!last.equals("")){
+                    String[] valido = last.split("//");
+                
+                    String Lista = quitarCaracteres(valido[0]);
+                    String Us = quitarCaracteres(valido[1]);
+
+                    if(Lista.equals(nombreLista) && Us.equals(usuario)){
+                        br.close();
+                        return Lista;
+                    }
+                    last = br.readLine();
+
+                }else{
+                    return "La lista no existe";
+                }
+            }
+        br.close();
+        return "La lista no existe";
+    }
+    
+    
+    
+    
     public String quitarCaracteres(String textoEntero)
     {
         StringBuilder texto = new StringBuilder();

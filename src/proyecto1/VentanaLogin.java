@@ -134,14 +134,7 @@ public class VentanaLogin extends javax.swing.JFrame {
 
     private void btnInisiarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInisiarSesionActionPerformed
         MetodosBitacora mb = new MetodosBitacora();
-        MetodosLista2 miLista = new MetodosLista2();
-        IndiceListaUsuario miIndice = new IndiceListaUsuario(7,"1.7","amigos","btn", "abeja", -1, "1");
-        String[] user = miIndice.ToString().split("//");
-        try {
-            miLista.agregar(user);
-        } catch (IOException ex) {
-            Logger.getLogger(VentanaLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
         try {
             String UsuarioActual[] = mb.login(txtUsuario.getText());
             

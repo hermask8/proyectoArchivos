@@ -14,6 +14,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Stream;
 
 /**
@@ -22,6 +26,86 @@ import java.util.stream.Stream;
  */
 public class MetodosLista2{
     MetodosBitacora mb = new MetodosBitacora();
+    
+    public void BorrarLineas(String linea1,String linea2,String lineaAgregar1,String lineaAgregar2)
+    {
+        try  
+        {
+            
+            List<String> miLista = new ArrayList<>();
+            File Archivo = new File("C:/MEIA/lista1.txt");
+            BufferedReader br2 = new BufferedReader(new FileReader(Archivo));
+            String last = br2.readLine(); 
+            while (last != null) 
+            { 
+                miLista.add(last);
+                last = br2.readLine(); 
+            } 
+            br2.close();
+            vaciarArchivo();
+            miLista.remove(Integer.valueOf(linea1)-1);
+            miLista.remove(Integer.valueOf(linea2)-1);
+            miLista.add(lineaAgregar1);
+            miLista.add(lineaAgregar2);
+            for ( String lineas : miLista ) 
+            {
+                LlenarArchivo("C:/MEIA/lista1.txt",lineas,"ERROR");
+            }
+            
+        }
+        catch(Exception ex)
+        {
+            
+        }
+    }
+    
+    public void BorrarLineas2(String linea1,String lineaAgregar1,String lineaAgregar2)
+    {
+        try  
+        {
+            int numero = 0;
+            List<String> miLista = new ArrayList<>();
+            File Archivo = new File("C:/MEIA/lista1.txt");
+            BufferedReader br2 = new BufferedReader(new FileReader(Archivo));
+            String last = br2.readLine(); 
+            while (last != null) 
+            { 
+                miLista.add(last);
+                last = br2.readLine();
+                numero++;
+            } 
+            br2.close();
+            vaciarArchivo();
+            miLista.remove(Integer.valueOf(linea1)-1);
+            miLista.add(lineaAgregar1);
+            miLista.add(lineaAgregar2);
+            Collections.sort(miLista, new Comparator<String>() {
+        public int compare(String o1, String o2) {
+            return extractInt(o1) - extractInt(o2);
+        }
+
+        int extractInt(String s) {
+            String num = s.replaceAll("\\D", "");
+            return num.isEmpty() ? 0 : Integer.parseInt(num);
+        }
+         });
+            for ( String lineas : miLista ) 
+            {
+                int numero2 = 0;
+                if (numero2<=numero)
+                {
+                    LlenarArchivo("C:/MEIA/lista1.txt",lineas,"ERROR");
+                    numero2++;
+                }
+                
+            }
+            
+        }
+        catch(Exception ex)
+        {
+            
+        }
+    }
     public boolean escribir(String[] usuario,String[] usuarioAsociado,int primero,int posicion) throws IOException
     {
         switch (comparar(usuarioAsociado[posicion],usuario[posicion])) {
@@ -35,10 +119,9 @@ public class MetodosLista2{
                     usuarioAsociado[5] = usuario[0];
                     
                     IndiceListaUsuario miLista  = new IndiceListaUsuario(Integer.valueOf(usuario[0]),usuario[1],usuario[2],usuario[3],usuario[4],Integer.valueOf(usuario[5]),usuario[6]);
-                    IndiceListaUsuario miLista2  = new IndiceListaUsuario(Integer.valueOf(usuarioAsociado[0]),usuarioAsociado[1],usuarioAsociado[2],usuarioAsociado[3],usuarioAsociado[4],Integer.valueOf(usuarioAsociado[5]),usuarioAsociado[6]);
-                    quitarApuntadoresInservibles(miLista.ToString(),miLista2.ToString(),"");
-                    vaciarArchivo();
-                    sobreEscribir(miLista.ToString(),miLista2.ToString(),"");
+                    IndiceListaUsuario miLista2  = new IndiceListaUsuario(Integer.valueOf(usuarioAsociado[0]),usuarioAsociado[1],usuarioAsociado[2],usuarioAsociado[3],usuarioAsociado[4],Integer.valueOf(usuarioAsociado[5]),usuarioAsociado[6]); 
+                 
+                    BorrarLineas(usuario[0],usuarioAsociado[0],miLista.ToString(),miLista2.ToString());
                 }
                 else
                 {
@@ -47,9 +130,9 @@ public class MetodosLista2{
                     usuarioAsociado[5] = usuario[0];
                     IndiceListaUsuario miLista  = new IndiceListaUsuario(Integer.valueOf(anterior[0]),anterior[1],anterior[2],anterior[3],anterior[4],Integer.valueOf(anterior[5]),anterior[6]);
                     IndiceListaUsuario miLista2  = new IndiceListaUsuario(Integer.valueOf(usuarioAsociado[0]),usuarioAsociado[1],usuarioAsociado[2],usuarioAsociado[3],usuarioAsociado[4],Integer.valueOf(usuarioAsociado[5]),usuarioAsociado[6]);
-                    quitarApuntadoresInservibles(miLista.ToString(),miLista2.ToString(),"");
-                    vaciarArchivo();
-                    sobreEscribir(miLista.ToString(),miLista2.ToString(),"");
+                   // vaciarArchivo();
+                    BorrarLineas2(anterior[0],miLista.ToString(),miLista2.ToString());
+                    
                     
                 }
                 return false;
@@ -59,9 +142,8 @@ public class MetodosLista2{
                     usuario[5] = usuarioAsociado[0];
                     IndiceListaUsuario miLista  = new IndiceListaUsuario(Integer.valueOf(usuario[0]),usuario[1],usuario[2],usuario[3],usuario[4],Integer.valueOf(usuario[5]),usuario[6]);
                     IndiceListaUsuario miLista2  = new IndiceListaUsuario(Integer.valueOf(usuarioAsociado[0]),usuarioAsociado[1],usuarioAsociado[2],usuarioAsociado[3],usuarioAsociado[4],Integer.valueOf(usuarioAsociado[5]),usuarioAsociado[6]);
-                    quitarApuntadoresInservibles(miLista.ToString(),miLista2.ToString(),"");
-                    vaciarArchivo();
-                    sobreEscribir(miLista.ToString(),miLista2.ToString(),"");
+                    //vaciarArchivo();
+                    BorrarLineas(usuario[0],usuarioAsociado[0],miLista.ToString(),miLista2.ToString());
                     return false;
                 }
                 else
@@ -81,10 +163,7 @@ public class MetodosLista2{
     }
     public void quitarApuntadoresInservibles(String registro1,String registro2,String registro3) throws FileNotFoundException, IOException
     {
-        String pathDescBitacora = "C:/MEIA/desc_bitacora.txt";
-        String pathBitacora = "C:/MEIA/bitacora.txt";
-        String pathMaster = "C:/MEIA/usuarios.txt";
-        String pathDescUsuario = "C:/MEIA/desc_usuario.txt";
+        
         File Archivo = new File("C:/MEIA/lista1.txt");
         BufferedReader br = new BufferedReader(new FileReader(Archivo));  
         String last = br.readLine();  
