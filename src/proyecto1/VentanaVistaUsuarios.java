@@ -120,6 +120,11 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
         });
 
         btnEliminarLista.setText("Eliminar Lista");
+        btnEliminarLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarListaActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Buscar ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -148,6 +153,11 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
         });
 
         btnEliminarAsociadoB.setText("Eliminar");
+        btnEliminarAsociadoB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarAsociadoBActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Descripcion:");
 
@@ -444,7 +454,7 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
 
     private void btnAgregarAsociadoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAsociadoBActionPerformed
         MetodosLista2 miLista = new MetodosLista2();
-        IndiceListaUsuario miIndice = new IndiceListaUsuario(7,"1.7","amigos","btn", "amena", -1, "1");
+        IndiceListaUsuario miIndice = new IndiceListaUsuario(6,"1.7","amigos","btn", "admin", -1, "1");
         String[] user = miIndice.ToString().split("//");
         try {
             miLista.agregar(user);
@@ -466,6 +476,20 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
             Logger.getLogger(VentanaVistaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnEliminarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarListaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarListaActionPerformed
+
+    private void btnEliminarAsociadoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAsociadoBActionPerformed
+        // TODO add your handling code here:
+        MetodosLista2 misMetodos = new MetodosLista2();
+        try {
+            misMetodos.eliminar("alex", "1");
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaVistaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnEliminarAsociadoBActionPerformed
 
     
     

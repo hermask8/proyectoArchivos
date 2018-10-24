@@ -56,6 +56,8 @@ public class DescIndiceLista {
         return cont;
     }
     
+    
+    
     public int registrosInactivos() throws FileNotFoundException, IOException{
         
         int cont = 0;

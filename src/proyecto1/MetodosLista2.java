@@ -26,7 +26,52 @@ import java.util.stream.Stream;
  */
 public class MetodosLista2{
     MetodosBitacora mb = new MetodosBitacora();
-    
+    public void BorrarLineas5(String lineaEliminar,String linea1)
+    {
+        try  
+        {
+            int numero = 0;
+            List<String> miLista = new ArrayList<>();
+            File Archivo = new File("C:/MEIA/lista1.txt");
+            BufferedReader br2 = new BufferedReader(new FileReader(Archivo));
+            String last = br2.readLine(); 
+            while (last != null) 
+            { 
+                miLista.add(last);
+                last = br2.readLine();
+                numero++;
+            } 
+            br2.close();
+            vaciarArchivo();
+            miLista.remove(Integer.valueOf(lineaEliminar)-1);
+            miLista.add(linea1);
+            Collections.sort(miLista, new Comparator<String>() {
+        public int compare(String o1, String o2) {
+            return extractInt(o1) - extractInt(o2);
+        }
+
+        int extractInt(String s) {
+            String num = s.replaceAll("\\D", "");
+            return num.isEmpty() ? 0 : Integer.parseInt(num);
+        }
+         });
+            for ( String lineas : miLista ) 
+            {
+                int numero2 = 0;
+                if (numero2<=numero)
+                {
+                    LlenarArchivo("C:/MEIA/lista1.txt",lineas,"ERROR");
+                    numero2++;
+                }
+                
+            }
+            
+        }
+        catch(Exception ex)
+        {
+            
+        }
+    }
     public void BorrarLineas4(String linea1)
     {
         try  
@@ -75,7 +120,7 @@ public class MetodosLista2{
    public void eliminar(String nombre, String primero) throws IOException
     {
         
-        String[] user = buscarUser("C:meia",nombre);
+        String[] user = buscarUser("C:/MEIA/lista1.txt",nombre);
         
         if(user[0].equals(primero))
         {
@@ -83,24 +128,24 @@ public class MetodosLista2{
             CasoBase2(user[0]);
             CasoBase(user[0]);
         }
-        else if (user[0].equals(primero) && !user[5].equals("-1")) 
+        else if (!user[0].equals(primero) && !user[5].equals("-1")) 
         {
-            String[] buscar = apuntadorSiguiente(Integer.valueOf(user[0]));
+            String[] buscar = buscar("C:/MEIA/lista1.txt",user[0]);
             BorrarLineas4(user[0]);
             buscar[5] = user[5];
             IndiceListaUsuario miLista  = new IndiceListaUsuario(Integer.valueOf(buscar[0]),buscar[1],buscar[2],buscar[3],buscar[4],Integer.valueOf(buscar[5]),buscar[6]);
-            BorrarLineas3(user[0],miLista.ToString());
+            BorrarLineas5(buscar[0],miLista.ToString());
             CasoBase(user[0]);
             CasoBase2(user[0]);
         }
         
         else if (user[5].equals("-1")) 
         {
-            String[] buscar = apuntadorSiguiente(Integer.valueOf(user[0]));
+            String[] buscar = buscar("C:/MEIA/lista1.txt",user[0]);
             BorrarLineas4(user[0]);
             buscar[5] = "-1";
             IndiceListaUsuario miLista  = new IndiceListaUsuario(Integer.valueOf(buscar[0]),buscar[1],buscar[2],buscar[3],buscar[4],Integer.valueOf(buscar[5]),buscar[6]);
-            BorrarLineas3(user[0],miLista.ToString());
+            BorrarLineas5(buscar[0],miLista.ToString());
             CasoBase(user[0]);
             CasoBase2(user[0]);
         }
@@ -158,7 +203,8 @@ public class MetodosLista2{
                 int numero = comparar(lines[0],registroEliminado);
                 if (numero==2) 
                 {
-                    lines[5] = String.valueOf(Integer.valueOf(lines[0])-1); 
+                    lines[0] = String.valueOf(Integer.valueOf(lines[0])-1); 
+                    lines[1] = "1."+String.valueOf(Integer.valueOf(lines[0])); 
                 }
                 
                 IndiceListaUsuario porLinea = new IndiceListaUsuario(Integer.valueOf(lines[0]),lines[1],lines[2],lines[3],lines[4],Integer.valueOf(lines[5]),lines[6]);
@@ -273,7 +319,7 @@ public class MetodosLista2{
             br2.close();
             vaciarArchivo();
             miLista.remove(Integer.valueOf(linea1)-1);
-            miLista.remove(Integer.valueOf(linea2)-1);
+           // miLista.remove(Integer.valueOf(linea2)-1);
             miLista.add(lineaAgregar1);
             miLista.add(lineaAgregar2);
             Collections.sort(miLista, new Comparator<String>() {

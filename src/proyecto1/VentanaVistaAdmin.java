@@ -298,6 +298,11 @@ public class VentanaVistaAdmin extends javax.swing.JFrame {
         btnAgregarAsociadoB.setText("Agregar");
 
         btnEliminarAsociadoB.setText("Eliminar");
+        btnEliminarAsociadoB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarAsociadoBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -522,6 +527,10 @@ public class VentanaVistaAdmin extends javax.swing.JFrame {
     private void btnCrearLista5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearLista5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCrearLista5ActionPerformed
+
+    private void btnEliminarAsociadoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAsociadoBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarAsociadoBActionPerformed
 
     /**
      * @param args the command line arguments
