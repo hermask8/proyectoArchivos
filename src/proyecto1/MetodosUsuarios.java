@@ -61,9 +61,11 @@ public class MetodosUsuarios {
             return "C:/MEIA/Fotografias/"+nombre+".jpg";
          }
     
-    
-    public void escribirDescMaster()
-    {
+    public boolean ExisteUsuario(){
         
+        
+        
+        return false;
     }
+    
 }

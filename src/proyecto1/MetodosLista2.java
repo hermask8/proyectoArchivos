@@ -308,7 +308,7 @@ public class MetodosLista2{
         {
             
             List<String> miLista = new ArrayList<>();
-            File Archivo = new File("C:/MEIA/lista1.txt");
+            File Archivo = new File("C:/MEIA/Indice_Lista_Usuario.txt");
             BufferedReader br2 = new BufferedReader(new FileReader(Archivo));
             String last = br2.readLine(); 
             while (last != null) 

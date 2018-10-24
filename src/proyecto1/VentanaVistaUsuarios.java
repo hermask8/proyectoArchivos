@@ -453,14 +453,19 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCrearLista5ActionPerformed
 
     private void btnAgregarAsociadoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAsociadoBActionPerformed
-        MetodosLista2 miLista = new MetodosLista2();
-        IndiceListaUsuario miIndice = new IndiceListaUsuario(6,"1.7","amigos","btn", "admin", -1, "1");
-        String[] user = miIndice.ToString().split("//");
-        try {
-            miLista.agregar(user);
-        } catch (IOException ex) {
-            Logger.getLogger(VentanaLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        // MetodosLista2 miLista = new MetodosLista2();
+        //IndiceListaUsuario miIndice = new IndiceListaUsuario(6,"1.7","amigos","btn", "admin", -1, "1");
+        //String[] user = miIndice.ToString().split("//");
+        //try {
+        //    miLista.agregar(user);
+        //} catch (IOException ex) {
+        //    Logger.getLogger(VentanaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        //}
+        MetodosUsuarios mu = new MetodosUsuarios();
+        
+        
+        
+        
     }//GEN-LAST:event_btnAgregarAsociadoBActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
