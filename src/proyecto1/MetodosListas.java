@@ -23,6 +23,14 @@ import javax.swing.JOptionPane;
  */
 public class MetodosListas {
     
+    public void DesactivarBitacoraLista(String nombreLista, String usuario){
+        File archivo = new File("C:/MEIA/Bitacora_Listas.txt");
+        
+    }
+    
+    
+    
+    
     
     public String BuscarListaBitacora(String usuario, String nombreLista) throws FileNotFoundException, IOException{
         
@@ -261,19 +269,7 @@ public class MetodosListas {
         return true;
     }
     
-    public int obtenerTopeBitacora() throws FileNotFoundException, IOException{
-        
-        int cont = 0;
-        File Archivo = new File("C:/MEIA/Desc_Bitacora_Listas.txt");
-        BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
-        String last = br.readLine();
-        
-        String [] textocompleto = last.split("//");
-        
-        br.close();
-        return Integer.parseInt(quitarCaracteres(textocompleto[5]));
-
-    }
+    
     
     
     public boolean EstaActivaBitacoraLista(String nombreLista, String usuario) throws FileNotFoundException, IOException{

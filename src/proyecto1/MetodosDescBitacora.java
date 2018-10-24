@@ -25,7 +25,10 @@ public class MetodosDescBitacora {
     
     Date fecha;
     
-    public String OrganizacionDeDatos(String usuario, int registros, int reorganizacion) throws IOException
+    
+    
+    
+    public String OrganizacionDeDatos(String usuario, int registros, int activos, int inactivos, int reorganizacion) throws IOException
         {
             StringBuilder sb = new StringBuilder();
 
@@ -36,9 +39,9 @@ public class MetodosDescBitacora {
             sb.append("//");
             sb.append(registros);
             sb.append("//");
-            sb.append(registrosActivos());
+            sb.append(activos);
             sb.append("//");
-            sb.append(registrosInactivos());
+            sb.append(inactivos);
             sb.append("//");
             sb.append(reorganizacion);
            
@@ -54,8 +57,9 @@ public class MetodosDescBitacora {
         String last = br.readLine();
         while (last != null) 
         { 
+
             lineaSeparada = last.split("//");
-            if(quitarCaracteres(lineaSeparada[4]) == "1"){
+            if(quitarCaracteres(lineaSeparada[4]).equals("1")){
                 cont++;
             }
             last = br.readLine();
@@ -76,8 +80,9 @@ public class MetodosDescBitacora {
         String last = br.readLine();
         while (last != null) 
         { 
+            
             lineaSeparada = last.split("//");
-            if(quitarCaracteres(lineaSeparada[4]) == "0"){
+            if(quitarCaracteres(lineaSeparada[4]).equals("0")){
                 cont++;
             }
             last = br.readLine();
@@ -162,8 +167,9 @@ public class MetodosDescBitacora {
         String last = br.readLine();
         while (last != null) 
         { 
-            last = br.readLine();
+            
             cont++;
+            last = br.readLine();
         }    
         
         br.close();
@@ -172,5 +178,19 @@ public class MetodosDescBitacora {
         return cont;
     }
     
+    
+    public int obtenerTopeBitacora() throws FileNotFoundException, IOException{
+        
+        int cont = 0;
+        File Archivo = new File("C:/MEIA/Desc_Bitacora_Listas.txt");
+        BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
+        String last = br.readLine();
+        
+        String [] textocompleto = last.split("//");
+        
+        br.close();
+        return Integer.parseInt(quitarCaracteres(textocompleto[5]));
+
+    }
     
 }

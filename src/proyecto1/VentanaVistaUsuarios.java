@@ -377,35 +377,35 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
                 if(ml.listaExiste("C:/MEIA/Bitacora_Listas.txt", lblUsuario.getText(), txtNombreLista.getText()) ||
                     ml.listaExiste("C:/MEIA/Listas.txt", lblUsuario.getText(), txtNombreLista.getText())  ){
                     
-                    if (ml.EstaActivaBitacoraLista(txtNombreLista.getText(), lblUsuario.getName()) || ml.EstaActivaListaMaster(txtNombreLista.getText(), lblUsuario.getText())) {
+                    if (ml.EstaActivaBitacoraLista(txtNombreLista.getText(), lblUsuario.getText()) || ml.EstaActivaListaMaster(txtNombreLista.getText(), lblUsuario.getText())) {
                         JOptionPane.showMessageDialog(null,"EL nombre escogido para la lista ya existe");
                     }else{
                         Listas l = new Listas(txtNombreLista.getText(), lblUsuario.getText(),txtDescripcion.getText(), contMiembro, 1);
                     String linea = l.ConvertirATextoTamañoFijo();
                         if(mdb.EstaVacio()){
                         
-                        String desc = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros(), 5);
+                        String desc = mdb.OrganizacionDeDatos(lblUsuario.getText(), 1,1,0, 5);
                         mdb.LlenarDescBitacora(desc);
-                        if(ml.bitacoraLLena(ml.obtenerTopeBitacora())){
+                        if(ml.bitacoraLLena(mdb.obtenerTopeBitacora())){
                             ml.LlenarListasMaster();
                             ml.LlenarBitacora(linea, "Error");
-                            String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros() , 5);
+                            String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), 1,1,0, 5);
                             mdb.LlenarDescBitacora(desc2);
                         }else{
                             ml.LlenarBitacora(linea, "Error");
-                            String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros(), 5);
+                            String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), 1,1,0, 5);
                             mdb.LlenarDescBitacora(desc2);
                         }
 
                         }else{
-                            if(ml.bitacoraLLena(ml.obtenerTopeBitacora())){
+                            if(ml.bitacoraLLena(mdb.obtenerTopeBitacora())){
                                 ml.LlenarListasMaster();
                                 ml.LlenarBitacora(linea, "Error");
-                                String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros() , 5);
+                                String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros(),mdb.registrosActivos(),mdb.registrosInactivos() , mdb.obtenerTopeBitacora());
                                 mdb.LlenarDescBitacora(desc2);
                             }else{
                                 ml.LlenarBitacora(linea, "Error");
-                                String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros(), 5);
+                                String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros(),mdb.registrosActivos(),mdb.registrosInactivos() , mdb.obtenerTopeBitacora());
                                 mdb.LlenarDescBitacora(desc2);
                             }
                         } 
@@ -418,28 +418,28 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
                     String linea = l.ConvertirATextoTamañoFijo();
                         if(mdb.EstaVacio()){
                         
-                        String desc = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros(), 5);
+                        String desc = mdb.OrganizacionDeDatos(lblUsuario.getText(), 1,1,0, 5);
                         mdb.LlenarDescBitacora(desc);
-                        if(ml.bitacoraLLena(ml.obtenerTopeBitacora())){
+                        if(ml.bitacoraLLena(mdb.obtenerTopeBitacora())){
                             ml.LlenarListasMaster();
                             ml.LlenarBitacora(linea, "Error");
-                            String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros() , 5);
+                            String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), 1,1,0, 5);
                             mdb.LlenarDescBitacora(desc2);
                         }else{
                             ml.LlenarBitacora(linea, "Error");
-                            String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros(), 5);
+                            String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), 1,1,0, 5);
                             mdb.LlenarDescBitacora(desc2);
                         }
 
                         }else{
-                            if(ml.bitacoraLLena(ml.obtenerTopeBitacora())){
+                            if(ml.bitacoraLLena(mdb.obtenerTopeBitacora())){
                                 ml.LlenarListasMaster();
                                 ml.LlenarBitacora(linea, "Error");
-                                String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros() , 5);
+                                String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros(),mdb.registrosActivos(),mdb.registrosInactivos() , mdb.obtenerTopeBitacora());
                                 mdb.LlenarDescBitacora(desc2);
                             }else{
                                 ml.LlenarBitacora(linea, "Error");
-                                String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros(), 5);
+                                String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros(),mdb.registrosActivos(),mdb.registrosInactivos() , mdb.obtenerTopeBitacora());
                                 mdb.LlenarDescBitacora(desc2);
                             }
                         }    
