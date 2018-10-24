@@ -6,59 +6,48 @@
 package proyecto1;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import static proyecto1.Usuarios.padLeft;
 
 /**
  *
  * @author chris
  */
-public class MetodosDescBitacora {
+public class DescIndiceLista {
     
-    Date fecha;
     
-    public String OrganizacionDeDatos(String usuario, int registros, int reorganizacion) throws IOException
+    public String OrganizacionDeDatos(int registroInicio) throws IOException
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.append(usuario);
+            sb.append(numeroRegistros());
             sb.append("//");
-            java.util.Date fecha = new Date();
-            sb.append(fecha);
-            sb.append("//");
-            sb.append(registros);
+            sb.append(registroInicio);
             sb.append("//");
             sb.append(registrosActivos());
             sb.append("//");
             sb.append(registrosInactivos());
-            sb.append("//");
-            sb.append(reorganizacion);
-           
+                       
             return sb.toString();
         }
     
     public int registrosActivos() throws FileNotFoundException, IOException{
         
         int cont = 0;
-        File Archivo = new File("C:/MEIA/Bitacora_Listas.txt");
+        File Archivo = new File("C:/MEIA/Indice_Lista.txt");
         String [] lineaSeparada;
         BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
         String last = br.readLine();
         while (last != null) 
         { 
+            last = br.readLine();
             lineaSeparada = last.split("//");
             if(quitarCaracteres(lineaSeparada[4]) == "1"){
                 cont++;
             }
-            last = br.readLine();
         }    
         
         br.close();
@@ -70,17 +59,17 @@ public class MetodosDescBitacora {
     public int registrosInactivos() throws FileNotFoundException, IOException{
         
         int cont = 0;
-        File Archivo = new File("C:/MEIA/Bitacora_Listas.txt");
+        File Archivo = new File("C:/MEIA/Indice_Lista.txt");
         String [] lineaSeparada;
         BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
         String last = br.readLine();
         while (last != null) 
         { 
+            last = br.readLine();
             lineaSeparada = last.split("//");
             if(quitarCaracteres(lineaSeparada[4]) == "0"){
                 cont++;
             }
-            last = br.readLine();
         }    
         
         br.close();
@@ -88,6 +77,7 @@ public class MetodosDescBitacora {
         
         return cont;
     }
+    
     
     public String quitarCaracteres(String textoEntero)
     {
@@ -104,60 +94,10 @@ public class MetodosDescBitacora {
         return texto.toString();
     }
     
-    
-    
-    public void LlenarDescBitacora(String cadena) throws IOException{
-        
-        String strError = "Error";
-        
-        BufferedWriter bw12 = new BufferedWriter(new FileWriter("C:/MEIA/Desc_Bitacora_Listas.txt"));
-        bw12.write("");
-        bw12.close();
-        
-        
-        File Archivo = new File("C:/MEIA/Desc_Bitacora_Listas.txt");
-        try
-        {
-            BufferedWriter bw1 = new BufferedWriter(new FileWriter("C:/MEIA/Desc_Bitacora_Listas.txt"));
-            bw1.write("");
-            bw1.close();
-            
-            
-            FileWriter Escribir = new FileWriter(Archivo,true);
-            BufferedWriter bw = new BufferedWriter(Escribir);
-            
-                
-            bw.write(cadena + System.lineSeparator());
-            bw.close();
-            Escribir.close();
-                
-        }
-        catch(IOException ex)
-        {
-            strError= ex.getMessage();
-        } 
-    }
-    
-    
-    public boolean EstaVacio() throws FileNotFoundException, IOException{
-        
-        File Archivo = new File("C:/MEIA/Desc_Bitacora_Listas.txt");
-        BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
-            String last = br.readLine();
-            
-            if(last != null){
-                return false;
-            }
-            
-        br.close();
-        return true;
-    }
-    
-    
     public int numeroRegistros() throws FileNotFoundException, IOException{
         
         int cont = 0;
-        File Archivo = new File("C:/MEIA/Bitacora_Listas.txt");
+        File Archivo = new File("C:/MEIA/Indice_Lista.txt");
         BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
         String last = br.readLine();
         while (last != null) 

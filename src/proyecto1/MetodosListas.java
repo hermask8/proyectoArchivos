@@ -276,4 +276,65 @@ public class MetodosListas {
     }
     
     
+    public boolean EstaActivaBitacoraLista(String nombreLista, String usuario) throws FileNotFoundException, IOException{
+        
+        File Archivo = new File("C:/MEIA/Bitacora_Listas.txt");
+        BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
+            String last = br.readLine();
+            while (last != null) 
+            { 
+                if(!last.equals("")){
+                    String[] valido = last.split("//");
+                
+                    String Lista = quitarCaracteres(valido[0]);
+                    String Us = quitarCaracteres(valido[1]);
+                    int estado = Integer.parseInt(quitarCaracteres(valido[4]));
+
+                    if(Lista.equals(nombreLista) && Us.equals(usuario)){
+                        if (estado == 1) {
+                            br.close();
+                            return true;
+                        }
+                    }
+                    last = br.readLine();
+
+                }else{
+                    return false;
+                }
+            }
+        br.close();
+        return false;
+    }
+    
+    public boolean EstaActivaListaMaster(String nombreLista, String usuario) throws FileNotFoundException, IOException{
+        
+        File Archivo = new File("C:/MEIA/Listas.txt");
+        BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
+            String last = br.readLine();
+            while (last != null) 
+            { 
+                if(!last.equals("")){
+                    String[] valido = last.split("//");
+                
+                    String Lista = quitarCaracteres(valido[0]);
+                    String Us = quitarCaracteres(valido[1]);
+                    int estado = Integer.parseInt(quitarCaracteres(valido[4]));
+
+                    if(Lista.equals(nombreLista) && Us.equals(usuario)){
+                        if (estado == 1) {
+                            br.close();
+                            return true;
+                        }
+                    }
+                    last = br.readLine();
+
+                }else{
+                    return false;
+                }
+            }
+        br.close();
+        return false;
+    }
+    
+    
 }
