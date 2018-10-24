@@ -27,6 +27,235 @@ import java.util.stream.Stream;
 public class MetodosLista2{
     MetodosBitacora mb = new MetodosBitacora();
     
+    public void BorrarLineas4(String linea1)
+    {
+        try  
+        {
+            int numero = 0;
+            List<String> miLista = new ArrayList<>();
+            File Archivo = new File("C:/MEIA/lista1.txt");
+            BufferedReader br2 = new BufferedReader(new FileReader(Archivo));
+            String last = br2.readLine(); 
+            while (last != null) 
+            { 
+                miLista.add(last);
+                last = br2.readLine();
+                numero++;
+            } 
+            br2.close();
+            vaciarArchivo();
+            miLista.remove(Integer.valueOf(linea1)-1);
+            Collections.sort(miLista, new Comparator<String>() {
+        public int compare(String o1, String o2) {
+            return extractInt(o1) - extractInt(o2);
+        }
+
+        int extractInt(String s) {
+            String num = s.replaceAll("\\D", "");
+            return num.isEmpty() ? 0 : Integer.parseInt(num);
+        }
+         });
+            for ( String lineas : miLista ) 
+            {
+                int numero2 = 0;
+                if (numero2<=numero)
+                {
+                    LlenarArchivo("C:/MEIA/lista1.txt",lineas,"ERROR");
+                    numero2++;
+                }
+                
+            }
+            
+        }
+        catch(Exception ex)
+        {
+            
+        }
+    }
+   public void eliminar(String nombre, String primero) throws IOException
+    {
+        
+        String[] user = buscarUser("C:meia",nombre);
+        
+        if(user[0].equals(primero))
+        {
+            BorrarLineas4(user[0]);
+            CasoBase2(user[0]);
+            CasoBase(user[0]);
+        }
+        else if (user[0].equals(primero) && !user[5].equals("-1")) 
+        {
+            String[] buscar = apuntadorSiguiente(Integer.valueOf(user[0]));
+            BorrarLineas4(user[0]);
+            buscar[5] = user[5];
+            IndiceListaUsuario miLista  = new IndiceListaUsuario(Integer.valueOf(buscar[0]),buscar[1],buscar[2],buscar[3],buscar[4],Integer.valueOf(buscar[5]),buscar[6]);
+            BorrarLineas3(user[0],miLista.ToString());
+            CasoBase(user[0]);
+            CasoBase2(user[0]);
+        }
+        
+        else if (user[5].equals("-1")) 
+        {
+            String[] buscar = apuntadorSiguiente(Integer.valueOf(user[0]));
+            BorrarLineas4(user[0]);
+            buscar[5] = "-1";
+            IndiceListaUsuario miLista  = new IndiceListaUsuario(Integer.valueOf(buscar[0]),buscar[1],buscar[2],buscar[3],buscar[4],Integer.valueOf(buscar[5]),buscar[6]);
+            BorrarLineas3(user[0],miLista.ToString());
+            CasoBase(user[0]);
+            CasoBase2(user[0]);
+        }
+        
+    }
+    
+    public void Ordenar() throws FileNotFoundException, IOException
+    {
+            List<String> miLista = new ArrayList<>();
+            File Archivo = new File("C:/MEIA/lista1.txt");
+            BufferedReader br2 = new BufferedReader(new FileReader(Archivo));
+            String last = br2.readLine(); 
+            while (last != null) 
+            { 
+                miLista.add(last);
+                last = br2.readLine(); 
+            } 
+            
+            Collections.sort(miLista, new Comparator<String>() {
+            public int compare(String o1, String o2) {
+            return extractInt(o1) - extractInt(o2);
+            }
+
+            int extractInt(String s) {
+            String num = s.replaceAll("\\D", "");
+            return num.isEmpty() ? 0 : Integer.parseInt(num);
+            }
+            });
+
+            for ( String lineas : miLista ) 
+            {
+                int numero2 = 0;
+                LlenarArchivo("C:/MEIA/lista1.txt",lineas,"ERROR");
+                numero2++;
+            }
+    }
+    public void CasoBase2(String registroEliminado) throws FileNotFoundException, IOException
+    {
+        try  
+        {
+            List<String> miLista = new ArrayList<>();
+            File Archivo = new File("C:/MEIA/lista1.txt");
+            BufferedReader br2 = new BufferedReader(new FileReader(Archivo));
+            String last = br2.readLine(); 
+            while (last != null) 
+            { 
+                miLista.add(last);
+                last = br2.readLine(); 
+            } 
+            br2.close();
+            vaciarArchivo();
+            for ( String lineas : miLista ) 
+            {
+                String[] lines = lineas.split("//");
+                int numero = comparar(lines[0],registroEliminado);
+                if (numero==2) 
+                {
+                    lines[5] = String.valueOf(Integer.valueOf(lines[0])-1); 
+                }
+                
+                IndiceListaUsuario porLinea = new IndiceListaUsuario(Integer.valueOf(lines[0]),lines[1],lines[2],lines[3],lines[4],Integer.valueOf(lines[5]),lines[6]);
+                LlenarArchivo("C:/MEIA/lista1.txt",porLinea.ToString(),"ERROR");
+            }
+            
+        }
+        catch(Exception ex)
+        {
+            
+        }
+    }
+    public void CasoBase(String registroEliminado) throws FileNotFoundException, IOException
+    {
+        try  
+        {
+            List<String> miLista = new ArrayList<>();
+            File Archivo = new File("C:/MEIA/lista1.txt");
+            BufferedReader br2 = new BufferedReader(new FileReader(Archivo));
+            String last = br2.readLine(); 
+            while (last != null) 
+            { 
+                miLista.add(last);
+                last = br2.readLine(); 
+            } 
+            br2.close();
+            vaciarArchivo();
+            for ( String lineas : miLista ) 
+            {
+                String[] lines = lineas.split("//");
+                if (!lines[5].equals("-1")) 
+                {
+                    int numero = comparar(lines[5],registroEliminado);
+                    if (numero==2) 
+                    {
+                        lines[5] = String.valueOf(Integer.valueOf(lines[5])-1); 
+                    }
+                }
+                
+                IndiceListaUsuario porLinea = new IndiceListaUsuario(Integer.valueOf(lines[0]),lines[1],lines[2],lines[3],lines[4],Integer.valueOf(lines[5]),lines[6]);
+                LlenarArchivo("C:/MEIA/lista1.txt",porLinea.ToString(),"ERROR");
+            }
+            
+        }
+        catch(Exception ex)
+        {
+            
+        }
+    }
+    
+    public void BorrarLineas3(String linea1,String lineaAgregar1)
+    {
+        try  
+        {
+            int numero = 0;
+            List<String> miLista = new ArrayList<>();
+            File Archivo = new File("C:/MEIA/lista1.txt");
+            BufferedReader br2 = new BufferedReader(new FileReader(Archivo));
+            String last = br2.readLine(); 
+            while (last != null) 
+            { 
+                miLista.add(last);
+                last = br2.readLine();
+                numero++;
+            } 
+            br2.close();
+            vaciarArchivo();
+            miLista.remove(Integer.valueOf(linea1)-1);
+            miLista.add(lineaAgregar1);
+            Collections.sort(miLista, new Comparator<String>() {
+        public int compare(String o1, String o2) {
+            return extractInt(o1) - extractInt(o2);
+        }
+
+        int extractInt(String s) {
+            String num = s.replaceAll("\\D", "");
+            return num.isEmpty() ? 0 : Integer.parseInt(num);
+        }
+         });
+            for ( String lineas : miLista ) 
+            {
+                int numero2 = 0;
+                if (numero2<=numero)
+                {
+                    LlenarArchivo("C:/MEIA/lista1.txt",lineas,"ERROR");
+                    numero2++;
+                }
+                
+            }
+            
+        }
+        catch(Exception ex)
+        {
+            
+        }
+    }
+    
     public void BorrarLineas(String linea1,String linea2,String lineaAgregar1,String lineaAgregar2)
     {
         try  
@@ -47,6 +276,17 @@ public class MetodosLista2{
             miLista.remove(Integer.valueOf(linea2)-1);
             miLista.add(lineaAgregar1);
             miLista.add(lineaAgregar2);
+            Collections.sort(miLista, new Comparator<String>() {
+            public int compare(String o1, String o2) {
+                return extractInt(o1) - extractInt(o2);
+            }
+
+        int extractInt(String s) {
+            String num = s.replaceAll("\\D", "");
+            return num.isEmpty() ? 0 : Integer.parseInt(num);
+            }
+         });
+
             for ( String lineas : miLista ) 
             {
                 LlenarArchivo("C:/MEIA/lista1.txt",lineas,"ERROR");
@@ -161,64 +401,8 @@ public class MetodosLista2{
     {
         escribir(buscar2("C:/MEIA/lista1.txt","1"),usuarioAgregar,1,2);
     }
-    public void quitarApuntadoresInservibles(String registro1,String registro2,String registro3) throws FileNotFoundException, IOException
-    {
-        
-        File Archivo = new File("C:/MEIA/lista1.txt");
-        BufferedReader br = new BufferedReader(new FileReader(Archivo));  
-        String last = br.readLine();  
-        while (last != null) 
-        { 
-            if (!registro1.equals("") && !registro2.equals("") && registro2.equals("") ) 
-            {
-                String[] excepto = last.split("//");
-                if(!excepto[0].equals(registro1) || !excepto[0].equals(registro2))
-                {
-                    LlenarArchivo("C:/MEIA/lista2.txt",last,"ERROR");
-                }
-            }
-            else if(!registro1.equals("") && !registro2.equals("") && !registro2.equals(""))
-            {
-                String[] excepto = last.split("//");
-                if(!excepto[0].equals(registro1) || !excepto[0].equals(registro2) || !excepto[0].equals(registro3) )
-                {
-                    LlenarArchivo("C:/MEIA/lista2.txt",last,"ERROR");
-                }
-            }
-            last = br.readLine(); 
-        } 
-        br.close();
-    }
+   
     
-    
-     public void sobreEscribir(String registro1, String registro2, String registro3) throws FileNotFoundException, IOException
-     {
-        String pathDescBitacora = "C:/MEIA/desc_bitacora.txt";
-        String pathBitacora = "C:/MEIA/bitacora.txt";
-        String pathMaster = "C:/MEIA/usuarios.txt";
-        String pathDescUsuario = "C:/MEIA/desc_usuario.txt";
-        File Archivo = new File("C:/MEIA/lista2.txt");
-        BufferedReader br = new BufferedReader(new FileReader(Archivo));  
-        String last = br.readLine();  
-        while (last != null) 
-        { 
-            LlenarArchivo("C:/MEIA/lista1.txt",last,"ERROR");
-            last = br.readLine(); 
-        } 
-        if (!registro1.equals("") && !registro2.equals("") && registro2.equals("") ) 
-        {
-            LlenarArchivo("C:/MEIA/lista1.txt",registro1,"ERROR");
-            LlenarArchivo("C:/MEIA/lista1.txt",registro2,"ERROR");
-        }
-        else if(!registro1.equals("") && !registro2.equals("") && !registro2.equals(""))
-        {
-            LlenarArchivo("C:/MEIA/lista1.txt",registro1,"ERROR");
-            LlenarArchivo("C:/MEIA/lista1.txt",registro2,"ERROR");
-            LlenarArchivo("C:/MEIA/lista1.txt",registro3,"ERROR");
-        }
-        br.close();
-    
-     }
     public void LlenarArchivo(String strPath,String strContenido,String strError)
     {
         
@@ -279,13 +463,6 @@ public class MetodosLista2{
     private void escribir(String nombreLista, String usuario, String[] encontrarEnArchivo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-    public void Eliminar(String nomLista, String nomUsuario)
-    {
-        
-    }
-    
     public String quitarCaracteres(String textoEntero)
     {
         StringBuilder texto = new StringBuilder();
@@ -363,6 +540,26 @@ public class MetodosLista2{
         BufferedWriter bw = new BufferedWriter(new FileWriter("C:/MEIA/lista1.txt"));
         bw.write("");
         bw.close();
+    }
+     
+     public String[] buscarUser(String path, String siguiente) throws FileNotFoundException, IOException
+    {
+        String[] objeto2 = null;
+        File Archivo = new File(path);
+        BufferedReader br2 = new BufferedReader(new FileReader(Archivo));
+        String last = br2.readLine(); 
+        while (last != null) 
+        { 
+            String[] objeto= last.split("//");
+            String nuevo = quitarCaracteres(objeto[4]);
+            if (nuevo.equals(siguiente)) {
+                objeto2 = objeto;
+            }
+            
+            last = br2.readLine(); 
+        } 
+        br2.close();
+        return retorno(objeto2);
     }
     
 }
