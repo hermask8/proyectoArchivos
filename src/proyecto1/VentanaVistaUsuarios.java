@@ -1,5 +1,9 @@
 package proyecto1;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -391,10 +395,12 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
                             ml.LlenarBitacora(linea, "Error");
                             String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), 1,1,0, 5);
                             mdb.LlenarDescBitacora(desc2);
+                            JOptionPane.showMessageDialog(null,"Lista creada exitosamente");
                         }else{
                             ml.LlenarBitacora(linea, "Error");
                             String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), 1,1,0, 5);
                             mdb.LlenarDescBitacora(desc2);
+                            JOptionPane.showMessageDialog(null,"Lista creada exitosamente");
                         }
 
                         }else{
@@ -403,10 +409,12 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
                                 ml.LlenarBitacora(linea, "Error");
                                 String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros(),mdb.registrosActivos(),mdb.registrosInactivos() , mdb.obtenerTopeBitacora());
                                 mdb.LlenarDescBitacora(desc2);
+                                JOptionPane.showMessageDialog(null,"Lista creada exitosamente");
                             }else{
                                 ml.LlenarBitacora(linea, "Error");
                                 String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros(),mdb.registrosActivos(),mdb.registrosInactivos() , mdb.obtenerTopeBitacora());
                                 mdb.LlenarDescBitacora(desc2);
+                                JOptionPane.showMessageDialog(null,"Lista creada exitosamente");
                             }
                         } 
                     }
@@ -425,10 +433,12 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
                             ml.LlenarBitacora(linea, "Error");
                             String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), 1,1,0, 5);
                             mdb.LlenarDescBitacora(desc2);
+                            JOptionPane.showMessageDialog(null,"Lista creada exitosamente");
                         }else{
                             ml.LlenarBitacora(linea, "Error");
                             String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), 1,1,0, 5);
                             mdb.LlenarDescBitacora(desc2);
+                            JOptionPane.showMessageDialog(null,"Lista creada exitosamente");
                         }
 
                         }else{
@@ -437,10 +447,12 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
                                 ml.LlenarBitacora(linea, "Error");
                                 String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros(),mdb.registrosActivos(),mdb.registrosInactivos() , mdb.obtenerTopeBitacora());
                                 mdb.LlenarDescBitacora(desc2);
+                                JOptionPane.showMessageDialog(null,"Lista creada exitosamente");
                             }else{
                                 ml.LlenarBitacora(linea, "Error");
                                 String desc2 = mdb.OrganizacionDeDatos(lblUsuario.getText(), mdb.numeroRegistros(),mdb.registrosActivos(),mdb.registrosInactivos() , mdb.obtenerTopeBitacora());
                                 mdb.LlenarDescBitacora(desc2);
+                                JOptionPane.showMessageDialog(null,"Lista creada exitosamente");
                             }
                         }    
                 }
@@ -451,17 +463,65 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_btnCrearLista5ActionPerformed
-
+    public String leerUltimaLinea(String strPath) throws FileNotFoundException, IOException
+    {
+        String lastLine= "";
+        File Archivo = new File(strPath);
+        
+        BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
+            String last = br.readLine(); 
+            while (last != null) 
+            { 
+            lastLine = last; 
+            last = br.readLine(); 
+            } 
+        br.close();
+        return lastLine;
+    }
+    
     private void btnAgregarAsociadoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAsociadoBActionPerformed
-        // MetodosLista2 miLista = new MetodosLista2();
-        //IndiceListaUsuario miIndice = new IndiceListaUsuario(6,"1.7","amigos","btn", "admin", -1, "1");
-        //String[] user = miIndice.ToString().split("//");
-        //try {
-        //    miLista.agregar(user);
-        //} catch (IOException ex) {
-        //    Logger.getLogger(VentanaLogin.class.getName()).log(Level.SEVERE, null, ex);
-        //}
+       
         MetodosUsuarios mu = new MetodosUsuarios();
+        MetodosListas ml = new MetodosListas();
+        DescListaUsuarios dlu = new DescListaUsuarios();
+        MetodosBitacora mb = new MetodosBitacora();
+        try {
+            String [] usuarioActual = mb.login(txtAsociadoB.getText());
+            if(usuarioActual==null)
+            {
+                JOptionPane.showMessageDialog(null,"Usuario no se encuentra");
+            }
+            else
+            {
+                if(!ml.UsuarioExisteListaUsuarios(lblMostrarLista.getText(),lblUsuario.getText())){
+                try {
+                    String desc = "";
+                    if(ml.ObtenerDescriptionBitacora(lblMostrarLista.getText(), lblUsuario.getText()).equals("0")){
+                        if(ml.ObtenerDescriptionMaster(lblMostrarLista.getText(), lblUsuario.getText()).equals("0")){
+                            
+                        }else{
+                            desc = ml.ObtenerDescriptionMaster(lblMostrarLista.getText(), lblUsuario.getText());
+                        }
+                    }else{
+                        desc = ml.ObtenerDescriptionBitacora(lblMostrarLista.getText(), lblUsuario.getText());
+                    }
+                    
+                    Listas_Usuario lu = new Listas_Usuario(lblMostrarLista.getText(),lblUsuario.getText(),txtAsociadoB.getText(),desc,1);
+                    String cadena = lu.ConvertirATextoTamañoFijo();
+                    lu.LlenarListaUsuario(cadena);
+                    String cadena2 = dlu.OrganizacionDeDatos(txtAsociadoB.getText(), dlu.numeroRegistros(),dlu.registrosActivos(), dlu.registrosInactivos());
+                    dlu.LlenarDescListaUsuario(cadena2);
+                    
+                } catch (IOException ex) {
+                    Logger.getLogger(VentanaVistaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null,"El usuario ya existe dentro de la lista");
+            }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaVistaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
         
@@ -483,14 +543,14 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnEliminarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarListaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnEliminarListaActionPerformed
 
     private void btnEliminarAsociadoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAsociadoBActionPerformed
         // TODO add your handling code here:
         MetodosLista2 misMetodos = new MetodosLista2();
         try {
-            misMetodos.eliminar("alex", "1");
+            misMetodos.cambiarStatus(txtAsociadoB.getText(),lblMostrarLista.getText());
         } catch (IOException ex) {
             Logger.getLogger(VentanaVistaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }

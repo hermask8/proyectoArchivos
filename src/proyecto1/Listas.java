@@ -45,9 +45,6 @@ public class Listas {
             sb.append(String.valueOf(Estatus));
             return sb.toString();
         }
-    
-    
-    
-    
+  
     
 }

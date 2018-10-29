@@ -18,16 +18,18 @@ import java.util.Date;
  *
  * @author chris
  */
-public class DescIndiceLista {
+public class DescListaUsuarios {
     
-    
-    public String OrganizacionDeDatos(int numeroRegistros,int registroInicio,int registrosActivos, int registrosInactivos) throws IOException
+    public String OrganizacionDeDatos(String usuarioCreador,int registros, int registrosActivos,int registrosInactivos) throws IOException
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.append(numeroRegistros);
+            sb.append(usuarioCreador);
             sb.append("//");
-            sb.append(registroInicio);
+            java.util.Date fecha = new Date();
+            sb.append(fecha);
+            sb.append("//");
+            sb.append(registros);
             sb.append("//");
             sb.append(registrosActivos);
             sb.append("//");
@@ -36,20 +38,33 @@ public class DescIndiceLista {
             return sb.toString();
         }
     
+    public boolean EstaVacio() throws FileNotFoundException, IOException{
+        
+        File Archivo = new File("C:/MEIA/Desc_Listas_Usuario.txt");
+        BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
+            String last = br.readLine();
+            
+            if(last != null){
+                return false;
+            }
+            
+        br.close();
+        return true;
+    }
     
-    public void LlenarDescIndice(String cadena) throws IOException{
+    public void LlenarDescListaUsuario(String cadena) throws IOException{
         
         String strError = "Error";
         
-        BufferedWriter bw12 = new BufferedWriter(new FileWriter("C:/MEIA/Desc_Bitacora_Listas.txt"));
+        BufferedWriter bw12 = new BufferedWriter(new FileWriter("C:/MEIA/Desc_Listas_Usuario.txt"));
         bw12.write("");
         bw12.close();
         
         
-        File Archivo = new File("C:/MEIA/Desc_Bitacora_Listas.txt");
+        File Archivo = new File("C:/MEIA/Desc_Listas_Usuario.txt");
         try
         {
-            BufferedWriter bw1 = new BufferedWriter(new FileWriter("C:/MEIA/Desc_Bitacora_Listas.txt"));
+            BufferedWriter bw1 = new BufferedWriter(new FileWriter("C:/MEIA/Desc_Listas_Usuario.txt"));
             bw1.write("");
             bw1.close();
             
@@ -69,10 +84,12 @@ public class DescIndiceLista {
         } 
     }
     
+    
+    
     public int registrosActivos() throws FileNotFoundException, IOException{
         
         int cont = 0;
-        File Archivo = new File("C:/MEIA/Indice_Listas_Usuario.txt");
+        File Archivo = new File("C:/MEIA/Listas_Usuario.txt");
         String [] lineaSeparada;
         BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
         String last = br.readLine();
@@ -92,25 +109,10 @@ public class DescIndiceLista {
         return cont;
     }
     
-    public boolean EstaVacio() throws FileNotFoundException, IOException{
-        
-        File Archivo = new File("C:/MEIA/Indice_Lista.txt");
-        BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
-            String last = br.readLine();
-            
-            if(last != null){
-                return false;
-            }
-            
-        br.close();
-        return true;
-    }
-    
-    
     public int registrosInactivos() throws FileNotFoundException, IOException{
         
         int cont = 0;
-        File Archivo = new File("C:/MEIA/Indice_Listas_Usuario.txt");
+        File Archivo = new File("C:/MEIA/Listas_Usuario.txt");
         String [] lineaSeparada;
         BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
         String last = br.readLine();
@@ -149,13 +151,14 @@ public class DescIndiceLista {
     public int numeroRegistros() throws FileNotFoundException, IOException{
         
         int cont = 0;
-        File Archivo = new File("C:/MEIA/Indice_Listas_Usuario.txt");
+        File Archivo = new File("C:/MEIA/Listas_Usuario.txt");
         BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
         String last = br.readLine();
         while (last != null) 
         { 
-            last = br.readLine();
+            
             cont++;
+            last = br.readLine();
         }    
         
         br.close();

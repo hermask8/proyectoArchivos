@@ -23,13 +23,56 @@ import javax.swing.JOptionPane;
  */
 public class MetodosListas {
     
+    
+    
+    
+    
+    
+    
+    
     public void DesactivarBitacoraLista(String nombreLista, String usuario){
         File archivo = new File("C:/MEIA/Bitacora_Listas.txt");
         
     }
     
     
+    public String ObtenerDescriptionMaster(String nombreLista, String usuario) throws FileNotFoundException, IOException{
+        File Archivo = new File("C:/MEIA/Listas.txt");
+        BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
+            String last = br.readLine();
+            while (last != null) 
+            { 
+                String [] separar = last.split("//");
+                String lista = quitarCaracteres(separar[0]);
+                String us = quitarCaracteres(separar[1]);
+                if(us.equals(usuario) && lista.equals(nombreLista)){
+                    return quitarCaracteres(separar[2]);
+                }
+                
+                last = br.readLine();
+            }
+        br.close();
+        return "0";
+    }
     
+    public String ObtenerDescriptionBitacora(String nombreLista, String usuario) throws FileNotFoundException, IOException{
+        File Archivo = new File("C:/MEIA/Bitacora_Listas.txt");
+        BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
+            String last = br.readLine();
+            while (last != null) 
+            { 
+                String [] separar = last.split("//");
+                String lista = quitarCaracteres(separar[0]);
+                String us = quitarCaracteres(separar[1]);
+                if(us.equals(usuario) && lista.equals(nombreLista)){
+                    return quitarCaracteres(separar[2]);
+                }
+                
+                last = br.readLine();
+            }
+        br.close();
+        return "0";
+    }
     
     
     public String BuscarListaBitacora(String usuario, String nombreLista) throws FileNotFoundException, IOException{
@@ -107,6 +150,33 @@ public class MetodosListas {
     public boolean listaExiste(String strPath,String usuario, String nombreLista) throws FileNotFoundException, IOException
     {
         File Archivo = new File(strPath);
+        BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
+            String last = br.readLine();
+            while (last != null) 
+            { 
+                if(!last.equals("")){
+                    String[] valido = last.split("//");
+                
+                    String Lista = quitarCaracteres(valido[0]);
+                    String Us = quitarCaracteres(valido[1]);
+
+                    if(Lista.equals(nombreLista) && Us.equals(usuario)){
+                        br.close();
+                        return true;
+                    }
+                    last = br.readLine();
+
+                }else{
+                    return false;
+                }
+            }
+        br.close();
+        return false;
+    }
+    
+    public boolean UsuarioExisteListaUsuarios(String nombreLista ,String usuario) throws FileNotFoundException, IOException
+    {
+        File Archivo = new File("C:/MEIA/Listas_Usuario.txt");
         BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
             String last = br.readLine();
             while (last != null) 
