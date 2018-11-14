@@ -62,18 +62,11 @@ public class Listas_Usuario {
         
         String strError = "Error";
         
-        BufferedWriter bw12 = new BufferedWriter(new FileWriter("C:/MEIA/Listas_Usuario.txt"));
-        bw12.write("");
-        bw12.close();
-        
         
         File Archivo = new File("C:/MEIA/Listas_Usuario.txt");
         try
         {
-            BufferedWriter bw1 = new BufferedWriter(new FileWriter("C:/MEIA/Listas_Usuario.txt"));
-            bw1.write("");
-            bw1.close();
-            
+           
             
             FileWriter Escribir = new FileWriter(Archivo,true);
             BufferedWriter bw = new BufferedWriter(Escribir);

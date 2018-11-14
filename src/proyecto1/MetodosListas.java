@@ -14,8 +14,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import static proyecto1.Usuarios.padLeft;
 
 /**
  *
@@ -34,6 +36,112 @@ public class MetodosListas {
         File archivo = new File("C:/MEIA/Bitacora_Listas.txt");
         
     }
+    
+    public void DesactivarUsuarioListaUsuario(String usuarioCreador,String nombreUsuario, String nombreLista) throws FileNotFoundException, IOException{
+        File Archivo = new File("C:/MEIA/Listas_Usuario.txt");
+        BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
+        String last = br.readLine();
+        int cont = 0;
+        while(last != null){
+            cont++;
+            last = br.readLine();
+        }
+        br.close();
+        BufferedReader br2 = new BufferedReader(new FileReader(Archivo));
+        last = br2.readLine();
+        String [] completo = new String [cont+1];
+        cont = 0;
+        
+        while(last != null){
+            completo[cont] = last;
+            cont++;
+            last = br2.readLine();
+        }
+        br2.close();
+        
+        for (int i = 0; i < completo.length; i++) {
+            if (completo[i] != null) {
+                String separar [] = completo[i].split("//");
+            String lista = quitarCaracteres(separar[0]);
+            String creador = quitarCaracteres(separar[1]);
+            String asociado = quitarCaracteres(separar[2]);
+            
+            if (lista.equals(nombreLista) && creador.equals(usuarioCreador) && asociado.equals(nombreUsuario)) {
+                completo[i] = null;
+            }
+            }
+            
+        }
+        
+        BufferedWriter bw12 = new BufferedWriter(new FileWriter("C:/MEIA/Listas_Usuario.txt"));
+        bw12.write("");
+        bw12.close();
+        
+        File Archivo3 = new File("C:/MEIA/Listas_Usuario.txt");
+        
+        FileWriter Escribir2 = new FileWriter(Archivo3,true);
+        BufferedWriter bw2 = new BufferedWriter(Escribir2);
+        
+        
+                
+        for (int i = 0; i < completo.length; i++) {
+            if (completo[i] != null){
+                bw2.write(completo[i] + System.lineSeparator());
+            }
+        }
+        
+        
+        bw2.close();
+        Escribir2.close();
+  
+            
+    }
+    
+    public String ConvertirATextoTamañoFijo(String nombre, String creador, String asociado,String descripcion, String estatus)
+    {
+            StringBuilder sb = new StringBuilder();
+
+            sb.append(padLeft(nombre,30,"%"));
+            sb.append("//");
+            sb.append(padLeft(creador,20,"%"));
+            sb.append("//");
+            sb.append(padLeft(asociado,20,"%"));
+            sb.append("//");
+            sb.append(padLeft(descripcion,40,"%"));
+            sb.append("//");
+            java.util.Date fecha = new Date();
+            sb.append(fecha);
+            sb.append("//");
+            sb.append(String.valueOf(estatus));
+            return sb.toString();
+    }
+    
+    
+    
+    public void LlenarListaUsuario(String cadena) throws IOException{
+        
+        String strError = "Error";
+        
+    
+        File Archivo = new File("C:/MEIA/Listas_Usuario.txt");
+        try
+        {
+            
+            FileWriter Escribir = new FileWriter(Archivo,true);
+            BufferedWriter bw = new BufferedWriter(Escribir);
+            
+                
+            bw.write(cadena + System.lineSeparator());
+            bw.close();
+            Escribir.close();
+                
+        }
+        catch(IOException ex)
+        {
+            strError= ex.getMessage();
+        } 
+    }
+    
     
     
     public String ObtenerDescriptionMaster(String nombreLista, String usuario) throws FileNotFoundException, IOException{
@@ -174,7 +282,7 @@ public class MetodosListas {
         return false;
     }
     
-    public boolean UsuarioExisteListaUsuarios(String nombreLista ,String usuario) throws FileNotFoundException, IOException
+    public boolean UsuarioExisteListaUsuarios(String nombreLista ,String usuarioCreador, String usuario) throws FileNotFoundException, IOException
     {
         File Archivo = new File("C:/MEIA/Listas_Usuario.txt");
         BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
@@ -186,8 +294,9 @@ public class MetodosListas {
                 
                     String Lista = quitarCaracteres(valido[0]);
                     String Us = quitarCaracteres(valido[1]);
+                    String usu = quitarCaracteres(valido[2]);
 
-                    if(Lista.equals(nombreLista) && Us.equals(usuario)){
+                    if(Lista.equals(nombreLista) && Us.equals(usuarioCreador) && usu.equals(usuario)){
                         br.close();
                         return true;
                     }

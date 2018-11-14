@@ -36,6 +36,16 @@ public class DescIndiceLista {
             return sb.toString();
         }
     
+    public int ObtenerRaiz() throws IOException{
+        File Archivo = new File("C:/MEIA/Desc_Indice_Lista_Usuarios.txt");
+        
+        BufferedReader br = new BufferedReader(new FileReader(Archivo)); 
+        String last = br.readLine();
+        String [] lineaSeparada = last.split("//");
+        
+        return Integer.valueOf(lineaSeparada[1]);
+        
+    }
     
     public void LlenarDescIndice(String cadena) throws IOException{
         
@@ -163,6 +173,8 @@ public class DescIndiceLista {
         
         return cont;
     }
+    
+    
     
     
 }

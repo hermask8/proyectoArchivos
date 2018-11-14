@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import proyecto_meia.BDD;
 
 /**
  *
@@ -21,6 +22,11 @@ public class VentanaLogin extends javax.swing.JFrame {
      */
     public VentanaLogin() {
         initComponents();
+        try{
+            BDD.getInstancia().conexion();
+        }catch(Exception ex){
+            
+        }
     }
 
     /**
@@ -145,7 +151,7 @@ public class VentanaLogin extends javax.swing.JFrame {
                         VentanaVistaAdmin vva = new VentanaVistaAdmin();
                         if(UsuarioActual[4].equals("1")){
                             vva.setVisible(true);
-                            vva.lblUsuarioAdmin.setText(txtUsuario.getText());
+                            vva.lblUsuario.setText(txtUsuario.getText());
                             this.setVisible(false);
                         }else{
                             vvu.setVisible(true);

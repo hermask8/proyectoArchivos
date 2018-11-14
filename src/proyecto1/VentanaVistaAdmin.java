@@ -39,7 +39,7 @@ public class VentanaVistaAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        lblUsuarioAdmin = new javax.swing.JLabel();
+        lblUsuario = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtContraseña = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -79,7 +79,6 @@ public class VentanaVistaAdmin extends javax.swing.JFrame {
         btnGuardarCambios = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         btnCrearLista5 = new javax.swing.JButton();
-        btnEliminarLista = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         txtNombreLista = new javax.swing.JTextField();
@@ -89,21 +88,19 @@ public class VentanaVistaAdmin extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         txtNombreB = new javax.swing.JTextField();
-        jLabel24 = new javax.swing.JLabel();
-        txtMiembroB = new javax.swing.JTextField();
         Asociado = new javax.swing.JLabel();
         txtAsociadoB = new javax.swing.JTextField();
-        btnAgregarMiembroB = new javax.swing.JButton();
-        btnEliminarMiembroB = new javax.swing.JButton();
         btnAgregarAsociadoB = new javax.swing.JButton();
         btnEliminarAsociadoB = new javax.swing.JButton();
+        jLabel20 = new javax.swing.JLabel();
+        lblMostrarLista = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Logo/LOGO_MEIA2 (2).png"))); // NOI18N
 
-        lblUsuarioAdmin.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        lblUsuarioAdmin.setText("Nombre de Usuario");
+        lblUsuario.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblUsuario.setText("Nombre de Usuario");
 
         jLabel3.setText("Contraseña:");
 
@@ -271,8 +268,6 @@ public class VentanaVistaAdmin extends javax.swing.JFrame {
             }
         });
 
-        btnEliminarLista.setText("Eliminar Lista");
-
         jButton1.setText("Buscar ");
 
         jLabel18.setText("Nombre:");
@@ -287,13 +282,7 @@ public class VentanaVistaAdmin extends javax.swing.JFrame {
 
         jLabel23.setText("Nombre:");
 
-        jLabel24.setText("Miembro:");
-
         Asociado.setText("Asociado:");
-
-        btnAgregarMiembroB.setText("Agregar");
-
-        btnEliminarMiembroB.setText("Eliminar");
 
         btnAgregarAsociadoB.setText("Agregar");
 
@@ -303,6 +292,12 @@ public class VentanaVistaAdmin extends javax.swing.JFrame {
                 btnEliminarAsociadoBActionPerformed(evt);
             }
         });
+
+        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel20.setText("Lista Activa:");
+
+        lblMostrarLista.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblMostrarLista.setText("-----");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -314,38 +309,6 @@ public class VentanaVistaAdmin extends javax.swing.JFrame {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGap(96, 96, 96)
-                                .addComponent(Asociado)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtAsociadoB, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnAgregarAsociadoB)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnEliminarAsociadoB))
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addGap(70, 70, 70)
-                                        .addComponent(jLabel21))
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel24)
-                                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabel23)))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtNombreB, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtMiembroB, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(22, 22, 22)
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addComponent(btnAgregarMiembroB)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnEliminarMiembroB))
-                                    .addComponent(btnEliminarLista)))
-                            .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGap(81, 81, 81)
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel19)
@@ -353,11 +316,36 @@ public class VentanaVistaAdmin extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtNombreLista, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtMiembro, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(34, 34, 34))
+                                    .addComponent(txtMiembro, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(Asociado)
+                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel23)))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNombreB, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                        .addComponent(txtAsociadoB, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnAgregarAsociadoB)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnEliminarAsociadoB))))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(99, 99, 99)
+                                .addComponent(jLabel20)
+                                .addGap(29, 29, 29)
+                                .addComponent(lblMostrarLista)))
+                        .addGap(42, 42, 42))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(btnCrearLista5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(81, 81, 81)
+                .addComponent(jLabel21)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel6Layout.createSequentialGroup()
                     .addGap(78, 78, 78)
@@ -377,27 +365,24 @@ public class VentanaVistaAdmin extends javax.swing.JFrame {
                     .addComponent(jLabel19))
                 .addGap(18, 18, 18)
                 .addComponent(btnCrearLista5)
-                .addGap(31, 31, 31)
+                .addGap(55, 55, 55)
                 .addComponent(jLabel21)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(lblMostrarLista))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNombreB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23)
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel23)
-                    .addComponent(txtNombreB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminarLista))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMiembroB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel24)
-                    .addComponent(btnAgregarMiembroB)
-                    .addComponent(btnEliminarMiembroB))
-                .addGap(15, 15, 15)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtAsociadoB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Asociado)
                     .addComponent(btnAgregarAsociadoB)
-                    .addComponent(btnEliminarAsociadoB))
-                .addContainerGap(84, Short.MAX_VALUE))
+                    .addComponent(btnEliminarAsociadoB)
+                    .addComponent(Asociado))
+                .addGap(31, 31, 31))
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel6Layout.createSequentialGroup()
                     .addGap(40, 40, 40)
@@ -447,14 +432,14 @@ public class VentanaVistaAdmin extends javax.swing.JFrame {
                         .addGap(35, 35, 35)
                         .addComponent(jLabel1)
                         .addGap(29, 29, 29)
-                        .addComponent(lblUsuarioAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addComponent(lblUsuarioAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -570,7 +555,6 @@ public class VentanaVistaAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Asociado;
     private javax.swing.JButton btnAgregarAsociadoB;
-    private javax.swing.JButton btnAgregarMiembroB;
     private javax.swing.JButton btnBackup;
     private javax.swing.JButton btnBuscarFoto;
     private javax.swing.JButton btnBuscarFoto2;
@@ -578,8 +562,6 @@ public class VentanaVistaAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btnCrearLista5;
     private javax.swing.JButton btnCrearUsuario;
     private javax.swing.JButton btnEliminarAsociadoB;
-    private javax.swing.JButton btnEliminarLista;
-    private javax.swing.JButton btnEliminarMiembroB;
     private javax.swing.JButton btnGuardarCambios;
     private javax.swing.JButton btnGuardarCambios2;
     private javax.swing.JButton jButton1;
@@ -594,10 +576,10 @@ public class VentanaVistaAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -609,7 +591,8 @@ public class VentanaVistaAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel lblMostrar;
     private javax.swing.JLabel lblMostrar2;
-    public javax.swing.JLabel lblUsuarioAdmin;
+    private javax.swing.JLabel lblMostrarLista;
+    public javax.swing.JLabel lblUsuario;
     private javax.swing.JTextField txtAsociadoB;
     private javax.swing.JTextField txtAño;
     private javax.swing.JTextField txtAño2;
@@ -622,7 +605,6 @@ public class VentanaVistaAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField txtMes;
     private javax.swing.JTextField txtMes2;
     private javax.swing.JTextField txtMiembro;
-    private javax.swing.JTextField txtMiembroB;
     private javax.swing.JTextField txtNombreB;
     private javax.swing.JTextField txtNombreLista;
     private javax.swing.JTextField txtTelefono;

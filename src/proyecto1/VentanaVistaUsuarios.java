@@ -5,9 +5,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import proyecto_meia.BDD;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -61,7 +63,6 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
         btnEstado = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         btnCrearLista5 = new javax.swing.JButton();
-        btnEliminarLista = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txtNombreLista = new javax.swing.JTextField();
@@ -77,6 +78,7 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
         txtDescripcion = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         lblMostrarLista = new javax.swing.JLabel();
+        btnEnviar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,13 +122,6 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
         btnCrearLista5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearLista5ActionPerformed(evt);
-            }
-        });
-
-        btnEliminarLista.setText("Eliminar Lista");
-        btnEliminarLista.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarListaActionPerformed(evt);
             }
         });
 
@@ -198,9 +193,7 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addComponent(jLabel15)
                                 .addGap(24, 24, 24)
-                                .addComponent(txtNombreB, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnEliminarLista)))
+                                .addComponent(txtNombreB, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 35, Short.MAX_VALUE))))
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
@@ -252,7 +245,6 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(txtNombreB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminarLista)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -263,53 +255,64 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
                 .addContainerGap(66, Short.MAX_VALUE))
         );
 
+        btnEnviar.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        btnEnviar.setText("Enviar Mensaje");
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel3)
+                        .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel8)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel7)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtAño, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel4)
+                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel8)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel7)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtAño, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel4)
-                                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(lblUsuario))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnSeleccionar)
-                                    .addComponent(lblMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel9))
-                                .addGap(30, 30, 30)
-                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(lblUsuario))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(btnEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(59, 59, 59)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSeleccionar)
+                            .addComponent(lblMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addGap(30, 30, 30)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnGuardarCambios, javax.swing.GroupLayout.PREFERRED_SIZE, 922, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addComponent(btnGuardarCambios, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(btnEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -358,7 +361,9 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
                                 .addGap(34, 34, 34))
                             .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addComponent(btnGuardarCambios, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnGuardarCambios, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                    .addComponent(btnEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(21, 21, 21))
         );
 
@@ -493,7 +498,7 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
             }
             else
             {
-                if(!ml.UsuarioExisteListaUsuarios(lblMostrarLista.getText(),lblUsuario.getText())){
+                if(!ml.UsuarioExisteListaUsuarios(lblMostrarLista.getText(),lblUsuario.getText(), txtAsociadoB.getText() )){
                 try {
                     String desc = "";
                     if(ml.ObtenerDescriptionBitacora(lblMostrarLista.getText(), lblUsuario.getText()).equals("0")){
@@ -507,10 +512,37 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
                     }
                     
                     Listas_Usuario lu = new Listas_Usuario(lblMostrarLista.getText(),lblUsuario.getText(),txtAsociadoB.getText(),desc,1);
+                    lu.ConvertirATextoTamañoFijo();
                     String cadena = lu.ConvertirATextoTamañoFijo();
                     lu.LlenarListaUsuario(cadena);
                     String cadena2 = dlu.OrganizacionDeDatos(txtAsociadoB.getText(), dlu.numeroRegistros(),dlu.registrosActivos(), dlu.registrosInactivos());
                     dlu.LlenarDescListaUsuario(cadena2);
+                    //Agrego nuevo dato a la lista indizada 
+                     MetodosLista2 misMetodos = new MetodosLista2();
+                    IndiceListaUsuario nuevo = new IndiceListaUsuario(dlu.numeroRegistros(), "1."+String.valueOf(dlu.numeroRegistros()),lblMostrarLista.getText(), lblUsuario.getText(), txtAsociadoB.getText(), -1, "1");
+                    String[] nuevo2 = nuevo.ToString().split("//");
+                    
+                    DescIndiceLista miDesc = new DescIndiceLista();
+                    File Archivo = new File("C:/MEIA/Indice_Listas_Usuario.txt"); //
+                    int numero =(int) Archivo.length();
+                    if (numero==0) {
+                        misMetodos.LlenarArchivo("C:/MEIA/Indice_Listas_Usuario.txt", nuevo.ToString(), "ERROR");
+                        
+                        
+                        misMetodos.LlenarArchivo("C:/MEIA/Desc_Indice_Lista_Usuarios.txt", miDesc.OrganizacionDeDatos( 1,1,1,0), "ERROR");
+                    }
+                    else
+                    {
+                        
+                        misMetodos.agregar(nuevo2,miDesc.ObtenerRaiz());
+                        String linea = miDesc.OrganizacionDeDatos( dlu.numeroRegistros(),miDesc.ObtenerRaiz(),dlu.numeroRegistros(),0);
+                        misMetodos.vaciarArchivo6();
+                        misMetodos.LlenarArchivo("C:/MEIA/Desc_Indice_Lista_Usuarios.txt", linea, "ERROR");
+                    }
+                   
+                   
+                    
+                    
                     
                 } catch (IOException ex) {
                     Logger.getLogger(VentanaVistaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
@@ -542,19 +574,35 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void btnEliminarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarListaActionPerformed
-        
-    }//GEN-LAST:event_btnEliminarListaActionPerformed
-
     private void btnEliminarAsociadoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAsociadoBActionPerformed
         // TODO add your handling code here:
         MetodosLista2 misMetodos = new MetodosLista2();
+         DescIndiceLista miDesc = new DescIndiceLista();
+         MetodosListas ml = new MetodosListas();
+       
         try {
-            misMetodos.cambiarStatus(txtAsociadoB.getText(),lblMostrarLista.getText());
+            misMetodos.eliminar(txtAsociadoB.getText(), String.valueOf(miDesc.ObtenerRaiz()));
         } catch (IOException ex) {
             Logger.getLogger(VentanaVistaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
+        try {
+            ml.DesactivarUsuarioListaUsuario(lblUsuario.getText(), txtAsociadoB.getText(), lblMostrarLista.getText());
+            DescListaUsuarios dlu = new DescListaUsuarios();
+            dlu.OrganizacionDeDatos(txtAsociadoB.getText(), dlu.numeroRegistros(), dlu.registrosActivos(), dlu.registrosInactivos());
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaVistaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+        
+        
     }//GEN-LAST:event_btnEliminarAsociadoBActionPerformed
+
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+        VistaEnviarMensaje vem = new VistaEnviarMensaje();
+        vem.setVisible(true);
+        vem.lblUsuario.setText(lblUsuario.getText());
+        this.setVisible(false);
+    }//GEN-LAST:event_btnEnviarActionPerformed
 
     
     
@@ -612,7 +660,7 @@ public class VentanaVistaUsuarios extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregarAsociadoB;
     private javax.swing.JButton btnCrearLista5;
     private javax.swing.JButton btnEliminarAsociadoB;
-    private javax.swing.JButton btnEliminarLista;
+    private javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnEstado;
     private javax.swing.JButton btnGuardarCambios;
     private javax.swing.JButton btnSeleccionar;

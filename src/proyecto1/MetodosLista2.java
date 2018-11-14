@@ -25,7 +25,42 @@ import java.util.stream.Stream;
  * @author ervi
  */
 public class MetodosLista2{
-    MetodosBitacora mb = new MetodosBitacora();
+    
+     public void vaciarArchivo6() throws FileNotFoundException, IOException
+    {
+        BufferedWriter bw = new BufferedWriter(new FileWriter("C:/MEIA/Desc_Indice_Lista_Usuarios.txt"));
+        bw.write("");
+        bw.close();
+    }
+    
+     public String[] buscarUser(String path, String siguiente) throws FileNotFoundException, IOException
+    {
+        String[] objeto2 = null;
+        File Archivo = new File(path);
+        BufferedReader br2 = new BufferedReader(new FileReader(Archivo));
+        String last = br2.readLine(); 
+        while (last != null) 
+        { 
+            String[] objeto= last.split("//");
+            String nuevo = quitarCaracteres(objeto[4]);
+            if (nuevo.equals(siguiente)) {
+                objeto2 = objeto;
+            }
+            
+            last = br2.readLine(); 
+        } 
+        br2.close();
+        return retorno(objeto2);
+    }
+     
+   public void vaciarArchivo2() throws FileNotFoundException, IOException
+    {
+        BufferedWriter bw = new BufferedWriter(new FileWriter("C:/MEIA/Indice_Listas_Usuario.txt"));
+        bw.write("");
+        bw.close();
+    }
+    
+    
     
     public String[] buscarDes(String path) throws FileNotFoundException, IOException
     {
@@ -46,6 +81,7 @@ public class MetodosLista2{
         br2.close();
         return retorno(objeto2);
     }
+    
     public boolean buscarDes2(String path) throws FileNotFoundException, IOException
     {
         try
@@ -63,15 +99,8 @@ public class MetodosLista2{
         }
         
     }
-    public int retornarRaiz() throws FileNotFoundException, IOException
-    {
-        File Archivo = new File("C:/MEIA/Desc_Indice_Lista_Usuarios.txt");
-        BufferedReader br2 = new BufferedReader(new FileReader(Archivo));
-        String last = br2.readLine();
-        String[] descriptor =last.split("//");
-        return Integer.valueOf(descriptor[1]);
-    }
-     public String[] buscarUser2(String path, String siguiente,String nombreLista) throws FileNotFoundException, IOException
+    
+    public String[] buscarUser2(String path, String siguiente,String nombreLista) throws FileNotFoundException, IOException
     {
         String[] objeto2 = null;
         File Archivo = new File(path);
@@ -91,25 +120,58 @@ public class MetodosLista2{
         br2.close();
         return retorno(objeto2);
     }
-    
-    public void cambiarStatus(String usuario, String nombreLista) throws IOException
+   
+    public void eliminar(String nombre, String primero,String nombreLista) throws IOException
     {
-        String[] user = buscarUser2("C:/MEIA/lista1.txt",usuario,nombreLista);
-        if (user!=null)
+        
+        String[] user = buscarUser2("C:/MEIA/Indice_Listas_Usuario.txt",nombre,nombreLista);
+        if (user!=null) {
+            if(user[0].equals(primero))
         {
-            user[6]="0";
-            IndiceListaUsuario miLista  = new IndiceListaUsuario(Integer.valueOf(user[0]),user[1],user[2],user[3],user[4],Integer.valueOf(user[5]),user[6]);
-            BorrarLineas5(user[0],miLista.ToString());
+            BorrarLineas4(user[0]);
+            CasoBase2(user[0]);
+            CasoBase(user[0]);
+            //Modificar descriptor cuando elimine y ahora el principio va a ser el eliminado.siguiente
+           // DescIndiceLista dil = new DescIndiceLista();
+            String[] anterior = buscarDes("C:/MEIA/Indice_Listas_Usuario.txt");
+            //String contenido = dil.OrganizacionDeDatos(Integer.valueOf(anterior[0]),Integer.valueOf(user[5])-1 , Integer.valueOf(anterior[2]), Integer.valueOf(anterior[3]));
+            //vaciarArchivo2();
+            //LlenarArchivo("C:/MEIA/Desc_Indice_Lista_Usuarios",contenido,"ERROR");
+        }
+        else if (!user[0].equals(primero) && !user[5].equals("-1")) 
+        {
+            String[] buscar = buscar("C:/MEIA/Indice_Listas_Usuario.txt",user[0]);
+            BorrarLineas4(user[0]);
+            buscar[5] = user[5];
+            IndiceListaUsuario miLista  = new IndiceListaUsuario(Integer.valueOf(buscar[0]),buscar[1],buscar[2],buscar[3],buscar[4],Integer.valueOf(buscar[5]),buscar[6]);
+            BorrarLineas5(buscar[0],miLista.ToString());
+            CasoBase(user[0]);
+            CasoBase2(user[0]);
         }
         
+        else if (user[5].equals("-1")) 
+        {
+            String[] buscar = buscar("C:/MEIA/Indice_Listas_Usuario.txt",user[0]);
+            BorrarLineas4(user[0]);
+            buscar[5] = "-1";
+            IndiceListaUsuario miLista  = new IndiceListaUsuario(Integer.valueOf(buscar[0]),buscar[1],buscar[2],buscar[3],buscar[4],Integer.valueOf(buscar[5]),buscar[6]);
+            BorrarLineas5(buscar[0],miLista.ToString());
+            CasoBase(user[0]);
+            CasoBase2(user[0]);
+        }
+        }
+        
+        
     }
+    
+    
     public void BorrarLineas5(String lineaEliminar,String linea1)
     {
         try  
         {
             int numero = 0;
             List<String> miLista = new ArrayList<>();
-            File Archivo = new File("C:/MEIA/lista1.txt");
+            File Archivo = new File("C:/MEIA/Indice_Listas_Usuario.txt");
             BufferedReader br2 = new BufferedReader(new FileReader(Archivo));
             String last = br2.readLine(); 
             while (last != null) 
@@ -137,7 +199,7 @@ public class MetodosLista2{
                 int numero2 = 0;
                 if (numero2<=numero)
                 {
-                    LlenarArchivo("C:/MEIA/lista1.txt",lineas,"ERROR");
+                    LlenarArchivo("C:/MEIA/Indice_Listas_Usuario.txt",lineas,"ERROR");
                     numero2++;
                 }
                 
@@ -155,7 +217,7 @@ public class MetodosLista2{
         {
             int numero = 0;
             List<String> miLista = new ArrayList<>();
-            File Archivo = new File("C:/MEIA/lista1.txt");
+            File Archivo = new File("C:/MEIA/Indice_Listas_Usuario.txt");
             BufferedReader br2 = new BufferedReader(new FileReader(Archivo));
             String last = br2.readLine(); 
             while (last != null) 
@@ -182,7 +244,7 @@ public class MetodosLista2{
                 int numero2 = 0;
                 if (numero2<=numero)
                 {
-                    LlenarArchivo("C:/MEIA/lista1.txt",lineas,"ERROR");
+                    LlenarArchivo("C:/MEIA/Indice_Listas_Usuario.txt",lineas,"ERROR");
                     numero2++;
                 }
                 
@@ -194,26 +256,22 @@ public class MetodosLista2{
             
         }
     }
-   public void eliminar(String nombre, String primero,String nombreLista) throws IOException
+   public void eliminar(String nombre, String primero) throws IOException
     {
         
-        String[] user = buscarUser2("C:/MEIA/lista1.txt",nombre,nombreLista);
-        if (user!=null) {
-            if(user[0].equals(primero))
+        String[] user = buscarUser("C:/MEIA/Indice_Listas_Usuario.txt",nombre);
+        DescIndiceLista miDesc = new DescIndiceLista();
+        if(user[0].equals(primero))
         {
+            vaciarArchivo6();
+            LlenarArchivo("C:/MEIA/Desc_Indice_Lista_Usuarios.txt", miDesc.OrganizacionDeDatos( 1,Integer.valueOf(user[5]),1,0), "ERROR");
             BorrarLineas4(user[0]);
             CasoBase2(user[0]);
             CasoBase(user[0]);
-            //Modificar descriptor cuando elimine y ahora el principio va a ser el eliminado.siguiente
-            DescIndiceLista dil = new DescIndiceLista();
-            String[] anterior = buscarDes("C:/MEIA/Desc_Indice_Lista_Usuarios");
-            String contenido = dil.OrganizacionDeDatos(Integer.valueOf(anterior[0]),Integer.valueOf(user[5])-1 , Integer.valueOf(anterior[2]), Integer.valueOf(anterior[3]));
-            vaciarArchivo2();
-            LlenarArchivo("C:/MEIA/Desc_Indice_Lista_Usuarios",contenido,"ERROR");
         }
         else if (!user[0].equals(primero) && !user[5].equals("-1")) 
         {
-            String[] buscar = buscar("C:/MEIA/lista1.txt",user[0]);
+            String[] buscar = buscar("C:/MEIA/Indice_Listas_Usuario.txt",user[0]);
             BorrarLineas4(user[0]);
             buscar[5] = user[5];
             IndiceListaUsuario miLista  = new IndiceListaUsuario(Integer.valueOf(buscar[0]),buscar[1],buscar[2],buscar[3],buscar[4],Integer.valueOf(buscar[5]),buscar[6]);
@@ -224,7 +282,7 @@ public class MetodosLista2{
         
         else if (user[5].equals("-1")) 
         {
-            String[] buscar = buscar("C:/MEIA/lista1.txt",user[0]);
+            String[] buscar = buscar("C:/MEIA/Indice_Listas_Usuario.txt",user[0]);
             BorrarLineas4(user[0]);
             buscar[5] = "-1";
             IndiceListaUsuario miLista  = new IndiceListaUsuario(Integer.valueOf(buscar[0]),buscar[1],buscar[2],buscar[3],buscar[4],Integer.valueOf(buscar[5]),buscar[6]);
@@ -232,15 +290,13 @@ public class MetodosLista2{
             CasoBase(user[0]);
             CasoBase2(user[0]);
         }
-        }
-        
         
     }
     
     public void Ordenar() throws FileNotFoundException, IOException
     {
             List<String> miLista = new ArrayList<>();
-            File Archivo = new File("C:/MEIA/lista1.txt");
+            File Archivo = new File("C:/MEIA/Indice_Listas_Usuario.txt");
             BufferedReader br2 = new BufferedReader(new FileReader(Archivo));
             String last = br2.readLine(); 
             while (last != null) 
@@ -263,7 +319,7 @@ public class MetodosLista2{
             for ( String lineas : miLista ) 
             {
                 int numero2 = 0;
-                LlenarArchivo("C:/MEIA/lista1.txt",lineas,"ERROR");
+                LlenarArchivo("C:/MEIA/Indice_Listas_Usuario.txt",lineas,"ERROR");
                 numero2++;
             }
     }
@@ -272,7 +328,7 @@ public class MetodosLista2{
         try  
         {
             List<String> miLista = new ArrayList<>();
-            File Archivo = new File("C:/MEIA/lista1.txt");
+            File Archivo = new File("C:/MEIA/Indice_Listas_Usuario.txt");
             BufferedReader br2 = new BufferedReader(new FileReader(Archivo));
             String last = br2.readLine(); 
             while (last != null) 
@@ -293,7 +349,7 @@ public class MetodosLista2{
                 }
                 
                 IndiceListaUsuario porLinea = new IndiceListaUsuario(Integer.valueOf(lines[0]),lines[1],lines[2],lines[3],lines[4],Integer.valueOf(lines[5]),lines[6]);
-                LlenarArchivo("C:/MEIA/lista1.txt",porLinea.ToString(),"ERROR");
+                LlenarArchivo("C:/MEIA/Indice_Listas_Usuario.txt",porLinea.ToString(),"ERROR");
             }
             
         }
@@ -307,7 +363,7 @@ public class MetodosLista2{
         try  
         {
             List<String> miLista = new ArrayList<>();
-            File Archivo = new File("C:/MEIA/lista1.txt");
+            File Archivo = new File("C:/MEIA/Indice_Listas_Usuario.txt");
             BufferedReader br2 = new BufferedReader(new FileReader(Archivo));
             String last = br2.readLine(); 
             while (last != null) 
@@ -330,7 +386,7 @@ public class MetodosLista2{
                 }
                 
                 IndiceListaUsuario porLinea = new IndiceListaUsuario(Integer.valueOf(lines[0]),lines[1],lines[2],lines[3],lines[4],Integer.valueOf(lines[5]),lines[6]);
-                LlenarArchivo("C:/MEIA/lista1.txt",porLinea.ToString(),"ERROR");
+                LlenarArchivo("C:/MEIA/Indice_Listas_Usuario.txt",porLinea.ToString(),"ERROR");
             }
             
         }
@@ -346,7 +402,7 @@ public class MetodosLista2{
         {
             int numero = 0;
             List<String> miLista = new ArrayList<>();
-            File Archivo = new File("C:/MEIA/lista1.txt");
+            File Archivo = new File("C:/MEIA/Indice_Listas_Usuario.txt");
             BufferedReader br2 = new BufferedReader(new FileReader(Archivo));
             String last = br2.readLine(); 
             while (last != null) 
@@ -374,7 +430,7 @@ public class MetodosLista2{
                 int numero2 = 0;
                 if (numero2<=numero)
                 {
-                    LlenarArchivo("C:/MEIA/lista1.txt",lineas,"ERROR");
+                    LlenarArchivo("C:/MEIA/Indice_Listas_Usuario.txt",lineas,"ERROR");
                     numero2++;
                 }
                 
@@ -420,7 +476,7 @@ public class MetodosLista2{
 
             for ( String lineas : miLista ) 
             {
-                LlenarArchivo("C:/MEIA/lista1.txt",lineas,"ERROR");
+                LlenarArchivo("C:/MEIA/Indice_Listas_Usuario.txt",lineas,"ERROR");
             }
             
         }
@@ -436,7 +492,7 @@ public class MetodosLista2{
         {
             int numero = 0;
             List<String> miLista = new ArrayList<>();
-            File Archivo = new File("C:/MEIA/lista1.txt");
+            File Archivo = new File("C:/MEIA/Indice_Listas_Usuario.txt");
             BufferedReader br2 = new BufferedReader(new FileReader(Archivo));
             String last = br2.readLine(); 
             while (last != null) 
@@ -465,7 +521,7 @@ public class MetodosLista2{
                 int numero2 = 0;
                 if (numero2<=numero)
                 {
-                    LlenarArchivo("C:/MEIA/lista1.txt",lineas,"ERROR");
+                    LlenarArchivo("C:/MEIA/Indice_Listas_Usuario.txt",lineas,"ERROR");
                     numero2++;
                 }
                 
@@ -479,23 +535,18 @@ public class MetodosLista2{
     }
     public boolean escribir(String[] usuario,String[] usuarioAsociado,int primero,int posicion) throws IOException
     {
-        if (buscarDes2("C:/MEIA/Indice_Listas_Usuario.txt")!= false)
-        {
-             //IndiceListaUsuario miLista  = new IndiceListaUsuario(1,"1.1",,usuario[3],usuario[4],Integer.valueOf(usuario[5]),usuario[6]);
-             switch (comparar(usuarioAsociado[posicion],usuario[posicion])) {
+        switch (comparar(usuarioAsociado[posicion],usuario[posicion])) {
             case 0:
                 posicion = posicion+1;
                 return escribir(usuario,usuarioAsociado,primero,posicion);
             case 1:
                 if (primero==Integer.valueOf(usuario[0]))
                 {
-                    DescIndiceLista dil = new DescIndiceLista();
+                    DescIndiceLista miDesc = new DescIndiceLista();
+                    
                     usuarioAsociado[5] = usuario[0];
-                    //Modifica el descriptor para que el nuevo sea el primero en la lista y ese va a ser el usuarioasociado[0]
-                    String[] anterior = buscarDes("C:/MEIA/Desc_Indice_Lista_Usuarios");
-                    String contenido = dil.OrganizacionDeDatos(Integer.valueOf(anterior[0]),Integer.valueOf(usuarioAsociado[0]) , Integer.valueOf(anterior[2]), Integer.valueOf(anterior[3]));
-                    vaciarArchivo2();
-                    LlenarArchivo("C:/MEIA/Desc_Indice_Lista_Usuarios",contenido,"ERROR");
+                    vaciarArchivo6();
+                    LlenarArchivo("C:/MEIA/Desc_Indice_Lista_Usuarios.txt", miDesc.OrganizacionDeDatos( 1,Integer.valueOf(usuarioAsociado[0]),1,0), "ERROR");
                     IndiceListaUsuario miLista  = new IndiceListaUsuario(Integer.valueOf(usuario[0]),usuario[1],usuario[2],usuario[3],usuario[4],Integer.valueOf(usuario[5]),usuario[6]);
                     IndiceListaUsuario miLista2  = new IndiceListaUsuario(Integer.valueOf(usuarioAsociado[0]),usuarioAsociado[1],usuarioAsociado[2],usuarioAsociado[3],usuarioAsociado[4],Integer.valueOf(usuarioAsociado[5]),usuarioAsociado[6]); 
                  
@@ -503,7 +554,7 @@ public class MetodosLista2{
                 }
                 else
                 {
-                    String[] anterior = buscar("C:/MEIA/lista1.txt",usuario[0]);
+                    String[] anterior = buscar("C:/MEIA/Indice_Listas_Usuario.txt",usuario[0]);
                     anterior[5] = usuarioAsociado[0];
                     usuarioAsociado[5] = usuario[0];
                     IndiceListaUsuario miLista  = new IndiceListaUsuario(Integer.valueOf(anterior[0]),anterior[1],anterior[2],anterior[3],anterior[4],Integer.valueOf(anterior[5]),anterior[6]);
@@ -533,17 +584,11 @@ public class MetodosLista2{
             default:
                 return false;
         }
-        }
-        else
-        {
-            return false;
-        }
-       
     }
     
-    public void agregar(String[] usuarioAgregar) throws IOException
+    public void agregar(String[] usuarioAgregar,int Raiz) throws IOException
     {
-        escribir(buscar2("C:/MEIA/lista1.txt",String.valueOf(retornarRaiz())),usuarioAgregar,retornarRaiz(),2);
+        escribir(buscar2("C:/MEIA/Indice_Listas_Usuario.txt",String.valueOf(Raiz)),usuarioAgregar,Raiz,2);
     }
    
     
@@ -593,7 +638,7 @@ public class MetodosLista2{
     }
     public String[] apuntadorSiguiente(int apuntador) throws IOException
     {
-        try (Stream<String> lines = Files.lines(Paths.get("C:/MEIA/lista1.txt"))) 
+        try (Stream<String> lines = Files.lines(Paths.get("C:/MEIA/Indice_Listas_Usuario.txt"))) 
         {
             String line = lines.skip(apuntador-1).findFirst().get();
             String[] especificLine = line.split("//");
@@ -681,35 +726,10 @@ public class MetodosLista2{
     
      public void vaciarArchivo() throws FileNotFoundException, IOException
     {
-        BufferedWriter bw = new BufferedWriter(new FileWriter("C:/MEIA/lista1.txt"));
+        BufferedWriter bw = new BufferedWriter(new FileWriter("C:/MEIA/Indice_Listas_Usuario.txt"));
         bw.write("");
         bw.close();
     }
-    public void vaciarArchivo2() throws FileNotFoundException, IOException
-    {
-        BufferedWriter bw = new BufferedWriter(new FileWriter("C:/MEIA/Desc_Indice_Lista_Usuarios"));
-        bw.write("");
-        bw.close();
-    }
-     
-     public String[] buscarUser(String path, String siguiente) throws FileNotFoundException, IOException
-    {
-        String[] objeto2 = null;
-        File Archivo = new File(path);
-        BufferedReader br2 = new BufferedReader(new FileReader(Archivo));
-        String last = br2.readLine(); 
-        while (last != null) 
-        { 
-            String[] objeto= last.split("//");
-            String nuevo = quitarCaracteres(objeto[4]);
-            if (nuevo.equals(siguiente)) {
-                objeto2 = objeto;
-            }
-            
-            last = br2.readLine(); 
-        } 
-        br2.close();
-        return retorno(objeto2);
-    }
+ 
     
 }
