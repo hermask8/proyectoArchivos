@@ -72,9 +72,9 @@ public class Listener extends Thread {
                                 
                              
                                 //Implementar el boolean buscar usuario
-                                UsarioExiste u = new UsarioExiste();
+                                //UsarioExiste u = new UsarioExiste();
                                 
-                                existe = u.Existe(Receptor);
+                                //existe = u.Existe(Receptor);
                                 
                                 
                                 if(existe){
@@ -128,8 +128,6 @@ public class Listener extends Thread {
             } catch (SQLException | InterruptedException sqle) {
                     sqle.printStackTrace();
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Listener.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
                 Logger.getLogger(Listener.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
