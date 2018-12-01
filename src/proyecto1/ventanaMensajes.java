@@ -22,32 +22,6 @@ public class ventanaMensajes extends javax.swing.JFrame {
     
     public ventanaMensajes() {
         initComponents();
-        
-        List<String> mensajesEnviados = Arbol.BuscarEmisor(usuarioLog,1);
-        List<String> mensajesRecibidos = Arbol.BuscarReceptor(usuarioLog,1);
-        
-        
-        if (mensajesRecibidos!=null) {
-         for (int i = 0; i < mensajesEnviados.size(); i++) {
-            String[] atributos = mensajesEnviados.get(i).split("\\|");
-            String mostrar = "Destinatario: " + atributos[3] + "  Mensaje: "  + atributos[6];
-            mensajesEnviados.remove(i);
-            mensajesEnviados.add(mostrar);
-        }   
-        }
-        
-        if (mensajesEnviados!=null) {
-            for (int i = 0; i < mensajesEnviados.size(); i++) {
-            String[] atributos = mensajesRecibidos.get(i).split("\\|");
-            String mostrar = "Destinatario: " + atributos[3] + "  Mensaje: "  + atributos[6];
-            mensajesRecibidos.remove(i);
-            mensajesRecibidos.add(mostrar);
-        }
-        }
-        
-        
-        listaEnviados = (JList<String>) mensajesEnviados;
-        ListaMensajesView = (JList<String>) mensajesRecibidos;
     }
 
     /**
@@ -65,6 +39,7 @@ public class ventanaMensajes extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         listaEnviados = new javax.swing.JList<>();
         jLabel2 = new javax.swing.JLabel();
+        btnRefresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,20 +65,32 @@ public class ventanaMensajes extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Mensajes Recibidos");
 
+        btnRefresh.setText("Refrescar Mensajes");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(134, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(289, 289, 289))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(79, 79, 79)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(138, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(31, 31, 31)
@@ -119,7 +106,9 @@ public class ventanaMensajes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE))
-                .addGap(119, 119, 119))
+                .addGap(46, 46, 46)
+                .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(45, 45, 45)
@@ -129,6 +118,35 @@ public class ventanaMensajes extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+         List<String> mensajesEnviados = Arbol.BuscarEmisor(usuarioLog,1);
+        List<String> mensajesRecibidos = Arbol.BuscarReceptor(usuarioLog,1);
+        
+        
+        if (mensajesRecibidos!=null) {
+         for (int i = 0; i < mensajesEnviados.size(); i++) {
+            String[] atributos = mensajesEnviados.get(i).split("\\|");
+            String mostrar = "Destinatario: " + atributos[3] + "  Mensaje: "  + atributos[6];
+            mensajesEnviados.remove(i);
+            mensajesEnviados.add(mostrar);
+        }   
+        }
+        
+        if (mensajesEnviados!=null) {
+            for (int i = 0; i < mensajesEnviados.size(); i++) {
+            String[] atributos = mensajesRecibidos.get(i).split("\\|");
+            String mostrar = "Destinatario: " + atributos[3] + "  Mensaje: "  + atributos[6];
+            mensajesRecibidos.remove(i);
+            mensajesRecibidos.add(mostrar);
+        }
+        }
+        
+        
+        listaEnviados = (JList<String>) mensajesEnviados;
+        ListaMensajesView = (JList<String>) mensajesRecibidos;
+    }//GEN-LAST:event_btnRefreshActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,6 +185,7 @@ public class ventanaMensajes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> ListaMensajesView;
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
