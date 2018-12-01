@@ -5,7 +5,12 @@
  */
 package proyecto1;
 
+import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import proyecto_meia.BDD;
@@ -19,6 +24,8 @@ public class VistaEnviarMensaje extends javax.swing.JFrame {
     /**
      * Creates new form VistaEnviarMensaje
      */
+    
+    
     public VistaEnviarMensaje() {
         initComponents();
     }
@@ -143,14 +150,37 @@ public class VistaEnviarMensaje extends javax.swing.JFrame {
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         try {
-            BDD.getInstancia().Insert(11, Integer.parseInt(txtGrupo.getText()), lblUsuario.getText(), txtUsuario.getText(), txtAsunto.getText(), txtMensaje.getText());
+            Arbol miArbol = new Arbol();
+            int numeroGrupo = Integer.valueOf(txtGrupo.getText());
+            String destinatario = txtUsuario.getText();
+            String asunto = txtAsunto.getText();
+            String Mensajes = jTextArea1.getText();
+            String tamFijo = Serialize.serializar("-1", "-1", lblUsuario.getText(), destinatario, CrearFecha(), asunto, Mensajes, "");
+            miArbol.InsertarMaster(tamFijo);
+            miArbol.Insertar(tamFijo, 1, 1, false);
+            BDD.getInstancia().Insert(11, Integer.parseInt(txtGrupo.getText()), lblUsuario.getText(), txtUsuario.getText(), txtAsunto.getText(), jTextArea1.getText());
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VentanaVistaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(VentanaVistaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(VistaEnviarMensaje.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(VistaEnviarMensaje.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnEnviarActionPerformed
 
+     private String CrearFecha(){
+        
+        Date date = Calendar.getInstance().getTime();
+        
+            DateFormat formatter = new SimpleDateFormat(
+                "EEEE, dd MMMM yyyy, hh:mm:ss.SSS a");
+            String today = formatter.format(date);
+            
+            return today;
+        
+    }
     /**
      * @param args the command line arguments
      */
