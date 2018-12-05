@@ -121,31 +121,8 @@ public class ventanaMensajes extends javax.swing.JFrame {
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
-         List<String> mensajesEnviados = Arbol.BuscarEmisor(usuarioLog,1);
-        List<String> mensajesRecibidos = Arbol.BuscarReceptor(usuarioLog,1);
+        ArbolBinario miArbol = new ArbolBinario();
         
-        
-        if (mensajesRecibidos!=null) {
-         for (int i = 0; i < mensajesEnviados.size(); i++) {
-            String[] atributos = mensajesEnviados.get(i).split("\\|");
-            String mostrar = "Destinatario: " + atributos[3] + "  Mensaje: "  + atributos[6];
-            mensajesEnviados.remove(i);
-            mensajesEnviados.add(mostrar);
-        }   
-        }
-        
-        if (mensajesEnviados!=null) {
-            for (int i = 0; i < mensajesEnviados.size(); i++) {
-            String[] atributos = mensajesRecibidos.get(i).split("\\|");
-            String mostrar = "Destinatario: " + atributos[3] + "  Mensaje: "  + atributos[6];
-            mensajesRecibidos.remove(i);
-            mensajesRecibidos.add(mostrar);
-        }
-        }
-        
-        
-        listaEnviados = (JList<String>) mensajesEnviados;
-        ListaMensajesView = (JList<String>) mensajesRecibidos;
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     /**

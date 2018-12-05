@@ -5,6 +5,7 @@
  */
 package proyecto1;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -51,6 +52,7 @@ public class VistaEnviarMensaje extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         btnEnviar = new javax.swing.JButton();
+        btnVentanaGrupal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,6 +85,8 @@ public class VistaEnviarMensaje extends javax.swing.JFrame {
             }
         });
 
+        btnVentanaGrupal.setText("Enviar Grupal");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -95,23 +99,26 @@ public class VistaEnviarMensaje extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(lblUsuario))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(txtMensaje)
-                                    .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                                    .addComponent(txtAsunto)))))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
-                        .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel3)
+                                        .addComponent(txtMensaje)
+                                        .addComponent(jLabel5))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                                            .addComponent(txtAsunto))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(txtGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btnVentanaGrupal)))))
+                            .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -124,11 +131,17 @@ public class VistaEnviarMensaje extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(49, 49, 49)
                         .addComponent(lblUsuario)))
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(txtGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnVentanaGrupal)
+                        .addGap(41, 41, 41)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -145,26 +158,44 @@ public class VistaEnviarMensaje extends javax.swing.JFrame {
                 .addGap(26, 26, 26))
         );
 
+        btnVentanaGrupal.getAccessibleContext().setAccessibleName("btnVentanaGrupal");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         try {
-            Arbol miArbol = new Arbol();
             int numeroGrupo = Integer.valueOf(txtGrupo.getText());
             String destinatario = txtUsuario.getText();
             String asunto = txtAsunto.getText();
             String Mensajes = jTextArea1.getText();
-            String tamFijo = Serialize.serializar("-1", "-1", lblUsuario.getText(), destinatario, CrearFecha(), asunto, Mensajes, "");
-            miArbol.InsertarMaster(tamFijo);
-            miArbol.Insertar(tamFijo, 1, 1, false);
+            ArbolBinario misMetodos= new ArbolBinario();
+        
+        File Archivo = new File("/Users/ervi/Desktop/Lista.txt"); //
+        int numero =(int) Archivo.length();
+        
+        if (numero==0) {
+            TamañoFijo miMensaje = new TamañoFijo(1,-1,-1,lblUsuario.getText(),destinatario,Mensajes);
+            misMetodos.LlenarArchivo("/Users/ervi/Desktop/Lista.txt", miMensaje.ConvertirATextoTamañoFijo(), "ERROR");
+            
+        }
+        else
+        {
+            int numero2 = 0;
+            String[] ultimaLinea = misMetodos.leerUltimaLinea("/Users/ervi/Desktop/Lista.txt").split("//");
+            numero2 = Integer.valueOf(ultimaLinea[0])+1;
+            TamañoFijo miMensaje = new TamañoFijo(numero2,-1,-1,lblUsuario.getText(),destinatario,Mensajes);
+            String[] nuevo = miMensaje.ConvertirATextoTamañoFijo().split("//");
+            misMetodos.agregar(nuevo,1);
+        }
+            
+            
+      
             BDD.getInstancia().Insert(11, Integer.parseInt(txtGrupo.getText()), lblUsuario.getText(), txtUsuario.getText(), txtAsunto.getText(), jTextArea1.getText());
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VentanaVistaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(VentanaVistaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(VistaEnviarMensaje.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(VistaEnviarMensaje.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -218,6 +249,7 @@ public class VistaEnviarMensaje extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnviar;
+    private javax.swing.JButton btnVentanaGrupal;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
